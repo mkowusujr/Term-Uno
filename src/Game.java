@@ -25,6 +25,10 @@ public class Game {
         blue = new Card('b', 4);
         System.out.println("Are r5 and y4 equal? " + red.equals(blue));
 
+        System.out.println("Drawing Seven Cards");
         Deck gameDeck = new Deck();
+        for (int i = 0; i < 7; i++)
+            System.out.print(gameDeck.drawCard() + " ");
+        System.out.print("\n");
     }
 }

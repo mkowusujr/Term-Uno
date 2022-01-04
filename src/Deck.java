@@ -3,7 +3,7 @@ import java.util.*;
 public class Deck{
     // TODO
     ArrayList<Card> playingDeck;
-    private final int MAX_SIZE = 108;
+    //private final int MAX_SIZE = 108;
     private final char[] colors = {'r', 'g', 'b', 'y'};
 
     private void unboxDeck(){
@@ -33,5 +33,8 @@ public class Deck{
         Collections.shuffle(playingDeck);
     }
 
+    public Card drawCard(){
+        return playingDeck.remove(playingDeck.size() - 1);
+    }
 
 }
