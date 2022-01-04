@@ -20,6 +20,10 @@ public class Card {
         faceUp = !faceUp;
     }
 
+    public int getValue(){
+        return value;
+    }
+
     public void cardAffect(Card Card) {
         // TODO Switch class to do some thing to the deck
         // TODO Maybe add Deck Object, or Game Object idk rn

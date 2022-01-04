@@ -45,6 +45,10 @@ public class Deck{
     public void playDeck(){
         discardDeck.add(drawCard());
         discardDeck.get(discardDeck.size() - 1).flipCard();
+
+        if (getTopOfDiscardDeck().getValue() > 10){
+            playDeck();
+        }
     }
     
     public Card getTopOfDeck(){
@@ -63,7 +67,7 @@ public class Deck{
         return hand;
     }
 
-    public void playCard(Card card){
+    public void addToDiscardCard(Card card){
         discardDeck.add(card);
     }
 
