@@ -32,9 +32,23 @@ public class Player {
         return played;
     }
 
-    public void playCard(Deck playingDeck, String played){
-        Card card = discardFromHand(played);
-        playingDeck.addToDiscardCard(card);
+    public boolean playCard(Deck playingDeck, String move){
+        if (move.equals("draw")){
+            System.out.println("Drawing card from deck...");
+            Card drawn = playingDeck.drawCard();
+            drawn.flipCard();
+            handCards.add(drawn);
+            move = drawn.toString();
+        }
+
+        Card card = discardFromHand(move);
+        if (playingDeck.getTopOfDiscardDeck().equals(card)){
+            playingDeck.addToDiscardCard(card);
+            return true;
+        }else{
+            handCards.add(card);
+            return false;
+        }
     }
 
     public String displayHand(){

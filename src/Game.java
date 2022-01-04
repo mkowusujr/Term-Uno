@@ -10,11 +10,19 @@ public class Game {
         System.out.println("You current hand is: " + p1.displayHand());
 
         Scanner kb = new Scanner(System.in);
-        System.out.println("Play a card");
-        String playCard = kb.next();
-        p1.playCard(gameDeck, playCard);
+        while(true){
+            System.out.println(gameDeck);
+            System.out.println("You current hand is: " + p1.displayHand());
+            System.out.println("Play a card");
+            String playCard = kb.next();
+            if (p1.playCard(gameDeck, playCard)){
+                continue;
+                //break;
+            }else{
+                System.out.println("You can't play that card");
+            }
+        }
 
-        System.out.println(gameDeck);
-        System.out.println("You current hand is: " + p1.displayHand());
+        //kb.close();
     }
 }

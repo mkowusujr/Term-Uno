@@ -33,7 +33,7 @@ public class Card {
     public boolean equals(Object other) {
         if (other instanceof Card) {
             Card lastPlayed = (Card) other;
-            if (this.color == lastPlayed.color) {
+            if (this.color == lastPlayed.color || this.color == 's') {
                 return true;
             }
             return this.value == lastPlayed.value;
