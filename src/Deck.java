@@ -1,8 +1,8 @@
 import java.util.*;
 
 public class Deck{
-    // TODO
     ArrayList<Card> playingDeck;
+    ArrayList<Card> discardDeck;
     //private final int MAX_SIZE = 108;
     private final char[] colors = {'r', 'g', 'b', 'y'};
 
@@ -31,10 +31,67 @@ public class Deck{
     public Deck(){
         unboxDeck();
         Collections.shuffle(playingDeck);
+        discardDeck = new ArrayList<Card>();
     }
 
     public Card drawCard(){
         return playingDeck.remove(playingDeck.size() - 1);
     }
 
+    public int deckSize(){
+        return playingDeck.size();
+    }
+
+    public void playDeck(){
+        discardDeck.add(drawCard());
+        discardDeck.get(discardDeck.size() - 1).flipCard();
+    }
+    
+    public Card getTopOfDeck(){
+        return playingDeck.get(playingDeck.size() - 1);
+    }
+    
+    public Card getTopOfDiscardDeck(){
+        return discardDeck.get(discardDeck.size() - 1);
+    }
+    
+    public ArrayList<Card> dealPlayingDeck(int cardAmount){
+        ArrayList<Card> hand = new ArrayList<Card>();
+        for (int i = 0; i < cardAmount; i ++){
+            hand.add(drawCard());
+        }
+        return hand;
+    }
+
+    public void playCard(Card card){
+        discardDeck.add(card);
+    }
+
+    private void resetDeck(){
+        for (Card card : discardDeck) {
+            card.flipCard();
+            playingDeck.add(card);
+        }
+        Collections.shuffle(playingDeck);
+    }
+
+    public boolean isEmpty(){
+        if (playingDeck.size() == 0){
+            System.out.println("Emptying, adding discard deck back in");
+            resetDeck();
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+    
+    @Override
+    public String toString(){
+        String output = "";
+        output += getTopOfDeck().toString();
+        output += "...";
+        output += getTopOfDiscardDeck().toString();
+        return output;
+    }
 }

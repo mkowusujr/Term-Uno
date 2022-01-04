@@ -10,11 +10,14 @@ public class Card {
     }
 
     public boolean isFaceUp() {
-        return faceUp;
+        if (faceUp)
+            return true;
+        else
+            return faceUp;
     }
 
-    public void flipCard(Card card) {
-        card.faceUp = !card.faceUp;
+    public void flipCard() {
+        faceUp = !faceUp;
     }
 
     public void cardAffect(Card Card) {
@@ -36,17 +39,21 @@ public class Card {
 
     @Override
     public String toString() {
-        if (value == 10)
-            return color + "x";
-        else if (value == 11)
-            return color + "<>";
-        else if (value == 12)
-            return color + "+2";
-        else if (value == 13)
-            return color + "w";
-        else if (value == 14)
-            return color + "+4";
-        else
-            return color + String.valueOf(value);
+        if (isFaceUp() == true){
+            if (value == 10)
+                return color + "x";
+            else if (value == 11)
+                return color + "<>";
+            else if (value == 12)
+                return color + "+2";
+            else if (value == 13)
+                return color + "w";
+            else if (value == 14)
+                return color + "+4";
+            else
+                return color + String.valueOf(value);    
+        }else{
+            return "u";
+        }
     }
 }
