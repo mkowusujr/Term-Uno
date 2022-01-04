@@ -24,10 +24,10 @@ public class Card {
         return value;
     }
 
-    public void cardAffect(Card Card) {
+    /*public void cardAffect(Card Card) {
         // TODO Switch class to do some thing to the deck
         // TODO Maybe add Deck Object, or Game Object idk rn
-    }
+    }*/
 
     @Override
     public boolean equals(Object other) {
