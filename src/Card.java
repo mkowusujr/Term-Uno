@@ -1,9 +1,9 @@
 public class Card {
     private char color;
-    private String value;
+    private int value;
     private boolean faceUp;
 
-    public Card(char color, String value) {
+    public Card(char color, int value) {
         this.color = color;
         this.value = value;
         faceUp = false;
@@ -29,13 +29,24 @@ public class Card {
             if (this.color == lastPlayed.color) {
                 return true;
             }
-            return this.value.equals(lastPlayed.value);
+            return this.value == lastPlayed.value;
         }
         return false;
     }
 
     @Override
     public String toString() {
-        return color + value;
+        if (value == 10)
+            return color + "x";
+        else if (value == 11)
+            return color + "<>";
+        else if (value == 12)
+            return color + "+2";
+        else if (value == 13)
+            return color + "w";
+        else if (value == 14)
+            return color + "+4";
+        else
+            return color + String.valueOf(value);
     }
 }
