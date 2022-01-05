@@ -39,10 +39,14 @@ public class Player { // TODO make this an abstract class
             drawn.flipCard();
             handCards.add(drawn);
             move = drawn.toString();
+            System.out.println("You drew a " + drawn + " card");
         }
 
         Card card = discardFromHand(move);
+        if (card == null)
+            handCards.remove(handCards.size() - 1);
         if (playingDeck.getTopOfDiscardDeck().equals(card)){
+            System.out.println("You played a " + card + " card");
             playingDeck.addToDiscardCard(card);
             return true;
         }else{

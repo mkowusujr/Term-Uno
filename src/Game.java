@@ -24,11 +24,12 @@ public class Game {
     }
 
     public void humanMove(Player player, Scanner kb) {
-        System.out.println(gameDeck);
-        System.out.println("You current hand is: " + player.displayHand());
-        System.out.println("Your Turn");
-        while (true) {
-                String playCard = kb.nextLine();
+        String playCard = "";
+        // System.out.println(gameDeck);
+        // System.out.println("You current hand is: " + player.displayHand());
+        // System.out.println("Your Turn");
+        do {
+                playCard = kb.nextLine();
             if (player.playCard(gameDeck, playCard)) {
                 if (gameDeck.getTopOfDiscardDeck().getValue() > 12){
                     System.out.println("What color would you like change it too");
@@ -37,13 +38,13 @@ public class Game {
                     Card discardTop = gameDeck.getTopOfDiscardDeck();
                     discardTop.changeColor(color);
                 }
-                System.out.println("\n");
+                // System.out.println("\n");
                 break;
             } else {
                 System.out.println("You can't play that card");
                 System.out.println(gameDeck);
             }
-        }
+        } while ( !playCard.equals("draw") );
     }
     
     /*private void aiMove(){
@@ -78,10 +79,16 @@ public class Game {
     }
 
     public String playGame(int startingPlayer, Scanner kb){
+        
         boolean skip = false;
         int nextPos;
-        // make player move
         Player player = players[startingPlayer];
+
+        System.out.println(gameDeck);
+        System.out.println("It is player number " + (startingPlayer+1) + "'s turn!");
+        System.out.println("Your current hand is: " + player.displayHand());
+
+        // make player move
         humanMove(player, kb);
         Card cardPlayed = gameDeck.getTopOfDiscardDeck();
         int topCardVal = cardPlayed.getValue();
@@ -113,13 +120,14 @@ public class Game {
         }
         if (player.getHandCount() == 1){
             // TODO UNO
-            System.out.println("UNO!");
+            System.out.println("UNO!\n");
             nextPos = whoGoesNext(startingPlayer, skip);
             return playGame(nextPos, kb);
         }else if (player.getHandCount() == 0){
-            return "player " + startingPlayer + " wins!";
+            return ("player " + startingPlayer + " wins!");
         }else{
             nextPos = whoGoesNext(startingPlayer, skip);
+            System.out.println("\n");
             return playGame(nextPos, kb);
         }
     }
