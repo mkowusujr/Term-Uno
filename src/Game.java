@@ -1,8 +1,9 @@
 import java.util.*;
 
 public class Game {
-    private Player[] players;
     private Deck gameDeck;
+    private Player[] players;
+    private boolean clockwise;
     private int round;
 
     public Game(int numPlayers, int cardsAtStart) {
@@ -18,10 +19,11 @@ public class Game {
             player.receiveHand(deltCards);
         }
         gameDeck.playDeck();
+        clockwise = true;
         round += 1;
     }
 
-    public void humanPlay(Player player, Scanner kb) {
+    public void humanMove(Player player, Scanner kb) {
         System.out.println(gameDeck);
         System.out.println("You current hand is: " + player.displayHand());
         System.out.println("Your Turn");
@@ -36,6 +38,22 @@ public class Game {
                 System.out.println(gameDeck);
             }
         }
+    }
+    
+    private void aiMove(){
+        // TODO
+    }
+    
+    private int nextPlayer(int lastPos){
+        return 0;
+    }
+
+    private int whoGoesNext(int lastPos, boolean skip){
+        return 0;
+    }
+
+    public String playGame(int startingPlayer){
+        return "";
     }
 
     public int currentRound() {

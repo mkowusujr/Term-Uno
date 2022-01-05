@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class Player {
+public class Player { // TODO make this an abstract class
     private ArrayList<Card> handCards;
     //private int handCount;
     public Player() {
