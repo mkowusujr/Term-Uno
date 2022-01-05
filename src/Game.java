@@ -29,9 +29,9 @@ public class Game {
         // System.out.println("You current hand is: " + player.displayHand());
         // System.out.println("Your Turn");
         do {
-                playCard = kb.nextLine();
+            playCard = kb.nextLine();
             if (player.playCard(gameDeck, playCard)) {
-                if (gameDeck.getTopOfDiscardDeck().getValue() > 12){
+                if (gameDeck.getTopOfDiscardDeck().getValue() > 12) {
                     System.out.println("What color would you like change it too");
                     System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
                     String color = kb.nextLine();
@@ -42,50 +42,52 @@ public class Game {
                 break;
             } else {
                 System.out.println("You can't play that card");
-                System.out.println(gameDeck);
+                // System.out.println(gameDeck);
             }
-        } while ( !playCard.equals("draw") );
+        } while (!playCard.equals("draw"));
     }
-    
-    /*private void aiMove(){
-        // TODO write ai
-    }*/
-    
-    private int nextPlayer(int lastPos){
+
+    /*
+     * private void aiMove(){
+     * // TODO write ai
+     * }
+     */
+
+    private int nextPlayer(int lastPos) {
         int currentPos = lastPos;
-        if (clockwise == true){ // go right
-            if (lastPos + 1 == players.length){
+        if (clockwise == true) { // go right
+            if (lastPos + 1 == players.length) {
                 currentPos = 0;
-            }else{
+            } else {
                 currentPos += 1;
             }
-        }else{ // go left
-            if(lastPos - 1 < 0){ 
+        } else { // go left
+            if (lastPos - 1 < 0) {
                 currentPos = players.length - 1;
-            }else{
+            } else {
                 currentPos -= 1;
             }
         }
         return currentPos;
     }
 
-    private int whoGoesNext(int lastPos, boolean skip){
+    private int whoGoesNext(int lastPos, boolean skip) {
         int currentPos = nextPlayer(lastPos);
-        if (skip == true){
+        if (skip == true) {
             return whoGoesNext(currentPos, false);
-        }else{
+        } else {
             return currentPos;
         }
     }
 
-    public String playGame(int startingPlayer, Scanner kb){
-        
+    public String playGame(int startingPlayer, Scanner kb) {
+
         boolean skip = false;
         int nextPos;
         Player player = players[startingPlayer];
 
         System.out.println(gameDeck);
-        System.out.println("It is player number " + (startingPlayer+1) + "'s turn!");
+        System.out.println("It is player number " + (startingPlayer + 1) + "'s turn!");
         System.out.println("Your current hand is: " + player.displayHand());
 
         // make player move
@@ -95,9 +97,9 @@ public class Game {
         if (topCardVal > 9) { // Special card played
             int nextPlayer;
             ArrayList<Card> deltCards;
-            switch(topCardVal){
+            switch (topCardVal) {
                 case 10: // skip card
-                skip = true;
+                    skip = true;
                     break;
                 case 11: // reverse card
                     clockwise = !clockwise;
@@ -118,14 +120,14 @@ public class Game {
                     break;
             }
         }
-        if (player.getHandCount() == 1){
+        if (player.getHandCount() == 1) {
             // TODO UNO
             System.out.println("UNO!\n");
             nextPos = whoGoesNext(startingPlayer, skip);
             return playGame(nextPos, kb);
-        }else if (player.getHandCount() == 0){
+        } else if (player.getHandCount() == 0) {
             return ("player " + startingPlayer + " wins!");
-        }else{
+        } else {
             nextPos = whoGoesNext(startingPlayer, skip);
             System.out.println("\n");
             return playGame(nextPos, kb);

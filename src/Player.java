@@ -2,29 +2,30 @@ import java.util.ArrayList;
 
 public class Player { // TODO make this an abstract class
     private ArrayList<Card> handCards;
-    //private int handCount;
+
+    // private int handCount;
     public Player() {
-       handCards = new ArrayList<Card>();
-       //handCount = handCards.size();
+        handCards = new ArrayList<Card>();
+        // handCount = handCards.size();
     }
 
-    public void receiveHand(ArrayList<Card> deltCards){
+    public void receiveHand(ArrayList<Card> deltCards) {
         for (Card card : deltCards) {
             card.flipCard();
             handCards.add(card);
-            //handCount += 1;
+            // handCount += 1;
         }
     }
 
-    public int getHandCount(){
+    public int getHandCount() {
 
         return handCards.size();
     }
 
-    private Card discardFromHand(String card){
+    private Card discardFromHand(String card) {
         Card played = null;
-        for (int i = 0; i < handCards.size(); i++){
-            if (handCards.get(i).toString().equals(card)){
+        for (int i = 0; i < handCards.size(); i++) {
+            if (handCards.get(i).toString().equals(card)) {
                 played = handCards.remove(i);
                 break;
             }
@@ -32,8 +33,8 @@ public class Player { // TODO make this an abstract class
         return played;
     }
 
-    public boolean playCard(Deck playingDeck, String move){
-        if (move.equals("draw")){
+    public boolean playCard(Deck playingDeck, String move) {
+        if (move.equals("draw")) {
             System.out.println("Drawing card from deck...");
             Card drawn = playingDeck.drawCard();
             drawn.flipCard();
@@ -45,17 +46,17 @@ public class Player { // TODO make this an abstract class
         Card card = discardFromHand(move);
         if (card == null)
             handCards.remove(handCards.size() - 1);
-        if (playingDeck.getTopOfDiscardDeck().equals(card)){
+        if (playingDeck.getTopOfDiscardDeck().equals(card)) {
             System.out.println("You played a " + card + " card");
             playingDeck.addToDiscardCard(card);
             return true;
-        }else{
+        } else {
             handCards.add(card);
             return false;
         }
     }
 
-    public String displayHand(){
+    public String displayHand() {
         String output = "";
         for (Card card : handCards) {
             output += card;

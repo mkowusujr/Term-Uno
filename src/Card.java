@@ -20,12 +20,12 @@ public class Card {
         faceUp = !faceUp;
     }
 
-    public int getValue(){
+    public int getValue() {
         return value;
     }
 
-    public void changeColor(String color){
-        if (value > 12){
+    public void changeColor(String color) {
+        if (value > 12) {
             this.color = color.charAt(0);
         }
     }
@@ -44,7 +44,7 @@ public class Card {
 
     @Override
     public String toString() {
-        if (isFaceUp() == true){
+        if (isFaceUp() == true) {
             if (value == 10)
                 return color + "x";
             else if (value == 11)
@@ -56,8 +56,8 @@ public class Card {
             else if (value == 14)
                 return color + "+4";
             else
-                return color + String.valueOf(value);    
-        }else{
+                return color + String.valueOf(value);
+        } else {
             return "u";
         }
     }
