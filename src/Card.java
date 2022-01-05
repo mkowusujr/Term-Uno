@@ -24,14 +24,20 @@ public class Card {
         return value;
     }
 
+    public void changeColor(String color){
+        if (value > 12){
+            this.color = color.charAt(0);
+        }
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof Card) {
-            Card lastPlayed = (Card) other;
-            if (this.color == lastPlayed.color || this.color == 's') {
+            Card cardPlayed = (Card) other;
+            if (this.color == cardPlayed.color || cardPlayed.color == 's') {
                 return true;
             }
-            return this.value == lastPlayed.value;
+            return this.value == cardPlayed.value;
         }
         return false;
     }

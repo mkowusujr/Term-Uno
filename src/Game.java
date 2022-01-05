@@ -30,8 +30,14 @@ public class Game {
         while (true) {
                 String playCard = kb.nextLine();
             if (player.playCard(gameDeck, playCard)) {
+                if (gameDeck.getTopOfDiscardDeck().getValue() > 12){
+                    System.out.println("What color would you like change it too");
+                    System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
+                    String color = kb.nextLine();
+                    Card discardTop = gameDeck.getTopOfDiscardDeck();
+                    discardTop.changeColor(color);
+                }
                 System.out.println("\n");
-                // continue;
                 break;
             } else {
                 System.out.println("You can't play that card");
@@ -40,9 +46,9 @@ public class Game {
         }
     }
     
-    // private void aiMove(){
-    //     // TODO write ai
-    // }
+    /*private void aiMove(){
+        // TODO write ai
+    }*/
     
     private int nextPlayer(int lastPos){
         int currentPos = lastPos;

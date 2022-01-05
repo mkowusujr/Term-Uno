@@ -46,7 +46,7 @@ public class Deck{
         discardDeck.add(drawCard());
         discardDeck.get(discardDeck.size() - 1).flipCard();
 
-        if (getTopOfDiscardDeck().getValue() > 10){
+        if (getTopOfDiscardDeck().getValue() > 9){
             playDeck();
         }
     }
