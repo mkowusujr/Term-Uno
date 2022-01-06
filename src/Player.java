@@ -34,6 +34,7 @@ public class Player { // TODO make this an abstract class
     }
 
     public boolean playCard(Deck playingDeck, String move) {
+        // playCard method that returns card
         if (move.equals("draw")) {
             System.out.println("Drawing card from deck...");
             Card drawn = playingDeck.drawCard();
@@ -46,6 +47,9 @@ public class Player { // TODO make this an abstract class
         Card card = discardFromHand(move);
         if (card == null)
             handCards.remove(handCards.size() - 1);
+        // return card
+        // can it be played    
+        // canPlayCard that returns boolean
         if (playingDeck.getTopOfDiscardDeck().equals(card)) {
             System.out.println("You played a " + card + " card");
             playingDeck.addToDiscardCard(card);

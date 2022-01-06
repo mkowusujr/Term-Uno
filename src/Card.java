@@ -30,6 +30,8 @@ public class Card {
         }
     }
 
+    // add can play card method here
+
     @Override
     public boolean equals(Object other) {
         if (other instanceof Card) {

@@ -24,12 +24,12 @@ public class Game {
     }
 
     public void humanMove(Player player, Scanner kb) {
+        // TODO make it return a card
         String playCard = "";
-        // System.out.println(gameDeck);
-        // System.out.println("You current hand is: " + player.displayHand());
-        // System.out.println("Your Turn");
         do {
             playCard = kb.nextLine();
+            // Card playedCard = player.playCard(gameDeck, playCard);
+            //playedCard.
             if (player.playCard(gameDeck, playCard)) {
                 if (gameDeck.getTopOfDiscardDeck().getValue() > 12) {
                     System.out.println("What color would you like change it too");
@@ -38,11 +38,9 @@ public class Game {
                     Card discardTop = gameDeck.getTopOfDiscardDeck();
                     discardTop.changeColor(color);
                 }
-                // System.out.println("\n");
                 break;
             } else {
                 System.out.println("You can't play that card");
-                // System.out.println(gameDeck);
             }
         } while (!playCard.equals("draw"));
     }
@@ -92,6 +90,7 @@ public class Game {
 
         // make player move
         humanMove(player, kb);
+        // TODO rather than checking the top of deck, check the value of the last card played
         Card cardPlayed = gameDeck.getTopOfDiscardDeck();
         int topCardVal = cardPlayed.getValue();
         if (topCardVal > 9) { // Special card played
@@ -120,8 +119,9 @@ public class Game {
                     break;
             }
         }
+
         if (player.getHandCount() == 1) {
-            // TODO UNO
+            // TODO UNO method
             System.out.println("UNO!\n");
             nextPos = whoGoesNext(startingPlayer, skip);
             return playGame(nextPos, kb);
