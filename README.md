@@ -12,7 +12,8 @@ In Uno there are 5 different types of card colors
 * black/wild card (these cards allow you to change its color to one of the previous listen ones)
 
 These are represented in the game as `r`, `g`, `b`, `y`, and `s` respectively
-In Uno the cards are number 0-9 (inclusive) and in addition to that there are specials types of cards
+
+In Uno the cards are number 0-9 (inclusive) and in addition to that there are specials types of cards.
 These special cards are the following
 * Skip Card - skips the next player
 * Reverse Card - changes the direction of the game
