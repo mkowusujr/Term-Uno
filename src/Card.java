@@ -30,13 +30,22 @@ public class Card {
         }
     }
 
-    // add can play card method here
+    public boolean canPlayCard(Deck playingDeck, Player player){
+        if (this.equals(playingDeck.getTopOfDiscardDeck())){
+            System.out.println("You played a " + this + " card");
+            playingDeck.addToDiscardCard(this);
+            return true;
+        } else {
+            player.receiveHand(this);
+            return false;
+        }
+    }
 
     @Override
     public boolean equals(Object other) {
         if (other instanceof Card) {
             Card cardPlayed = (Card) other;
-            if (this.color == cardPlayed.color || cardPlayed.color == 's') {
+            if (this.color == cardPlayed.color || this.color == 's') {
                 return true;
             }
             return this.value == cardPlayed.value;

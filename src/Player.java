@@ -16,6 +16,12 @@ public class Player { // TODO make this an abstract class
             // handCount += 1;
         }
     }
+    public void receiveHand(Card card) {
+        
+            handCards.add(card);
+            // handCount += 1;
+        
+    }
 
     public int getHandCount() {
 
@@ -33,7 +39,7 @@ public class Player { // TODO make this an abstract class
         return played;
     }
 
-    public boolean playCard(Deck playingDeck, String move) {
+    public Card playCard(Deck playingDeck, String move) {
         // playCard method that returns card
         if (move.equals("draw")) {
             System.out.println("Drawing card from deck...");
@@ -47,18 +53,9 @@ public class Player { // TODO make this an abstract class
         Card card = discardFromHand(move);
         if (card == null)
             handCards.remove(handCards.size() - 1);
-        // return card
-        // can it be played    
-        // canPlayCard that returns boolean
-        if (playingDeck.getTopOfDiscardDeck().equals(card)) {
-            System.out.println("You played a " + card + " card");
-            playingDeck.addToDiscardCard(card);
-            return true;
-        } else {
-            handCards.add(card);
-            return false;
-        }
+        return card;
     }
+    
 
     public String displayHand() {
         String output = "";

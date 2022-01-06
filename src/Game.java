@@ -24,13 +24,11 @@ public class Game {
     }
 
     public void humanMove(Player player, Scanner kb) {
-        // TODO make it return a card
         String playCard = "";
         do {
             playCard = kb.nextLine();
-            // Card playedCard = player.playCard(gameDeck, playCard);
-            //playedCard.
-            if (player.playCard(gameDeck, playCard)) {
+            Card playedCard = player.playCard(gameDeck, playCard);
+            if (playedCard.canPlayCard(gameDeck, player)) {
                 if (gameDeck.getTopOfDiscardDeck().getValue() > 12) {
                     System.out.println("What color would you like change it too");
                     System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
@@ -90,7 +88,6 @@ public class Game {
 
         // make player move
         humanMove(player, kb);
-        // TODO rather than checking the top of deck, check the value of the last card played
         Card cardPlayed = gameDeck.getTopOfDiscardDeck();
         int topCardVal = cardPlayed.getValue();
         if (topCardVal > 9) { // Special card played
@@ -109,7 +106,7 @@ public class Game {
                     players[nextPlayer].receiveHand(deltCards);
                     skip = true;
                     break;
-                case 13: // wild card
+                case 13: // wild card, handled in elsewhere
                     break;
                 case 14: // draw 4 wild card
                     nextPlayer = nextPlayer(startingPlayer);
@@ -142,7 +139,7 @@ public class Game {
         Game newGame = new Game(2, 7);
         Scanner kb = new Scanner(System.in);
         System.out.println("Round " + newGame.currentRound());
-        newGame.playGame(0, kb);
+        System.out.println(newGame.playGame(0, kb));
         kb.close();
     }
 }
