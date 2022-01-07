@@ -89,7 +89,7 @@ public class Game {
                         break;
                     case 11: // reverse card
                         clockwise = !clockwise;
-                        System.out.print("The direction got reverse, we are now playing ");
+                        System.out.print("The direction got reversed, we are now playing in ");
                         if (clockwise)
                             System.out.println("clockwise");
                         else

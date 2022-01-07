@@ -9,7 +9,7 @@ public class Computer extends Player {
     private void think() {
         try {
             int thinkTime = 0;
-            thinkTime = (int) Math.random() * (5000 - 3000 + 1) + 3000;
+            thinkTime = (int) Math.random() * (3000 - 500 + 1) + 500;
             Thread.sleep(thinkTime);
         } catch (Exception e) {
             System.out.println(e);
