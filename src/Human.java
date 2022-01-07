@@ -20,7 +20,7 @@ public class Human extends Player {
     private Card discardFromHand(String card) {
         Card played = null;
         for (int i = 0; i < handCards.size(); i++) {
-            if (handCards.get(i).toString().equals(card)) {
+            if (handCards.get(i).stringVal().equals(card)) {
                 played = handCards.remove(i);
                 break;
             }
@@ -36,7 +36,7 @@ public class Human extends Player {
             Card drawn = playingDeck.drawCard();
             drawn.flipCard();
             handCards.add(drawn);
-            move = drawn.toString();
+            move = drawn.stringVal();
             System.out.println("You drew a " + drawn + " card");
         }
 
@@ -64,19 +64,19 @@ public class Human extends Player {
                     System.out.print("Changing the color to ");
                     switch (color.charAt(0)) {
                         case 'r':
-                            System.out.println("red");
-                            break;
-                        case 'b':
-                            System.out.println("blue");
-                            break;
-                        case 'g':
-                            System.out.println("green");
-                            break;
-                        case 'y':
-                            System.out.println("yellow");
-                            break;
-                    }
-                    discardTop.changeColor(color);
+                        System.out.println("\033[31;1mred\033[0m");
+                        break;
+                    case 'b':
+                        System.out.println("\033[34;1mblue\033[0m");
+                        break;
+                    case 'g':
+                        System.out.println("\033[32;1mgreen\033[0m");
+                        break;
+                    case 'y':
+                        System.out.println("\033[33;1myellow\033[0m");
+                        break;
+                }
+                discardTop.changeColor(color);
                 }
                 break;
             } else if (playedCard == null) {

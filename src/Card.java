@@ -20,7 +20,7 @@ public class Card {
         faceUp = !faceUp;
     }
 
-    public char getColor(){
+    public char getColor() {
         return color;
     }
 
@@ -63,8 +63,7 @@ public class Card {
         return false;
     }
 
-    @Override
-    public String toString() {
+    public String stringVal() {
         if (isFaceUp() == true) {
             if (value == 10)
                 return color + "x";
@@ -80,6 +79,46 @@ public class Card {
                 return color + String.valueOf(value);
         } else {
             return "u";
+        }
+    }
+
+    @Override
+    public String toString() {
+        String output = "";
+        if (faceUp == true) {
+            switch (color) {
+                case 'r':
+                    output += "\033[31;1m"; // bold red
+                    break;
+                case 'g':
+                    output += "\033[32;1m"; // bold green
+                    break;
+                case 'b':
+                    output += "\033[34;1m"; // bold blue
+                    break;
+                case 'y':
+                    output += "\033[33;1m"; // bold yellow
+                    break;
+                case 's':
+                    output += "\033[37;1m"; // bold white
+                    break;
+            }
+        }
+        if (isFaceUp() == true) {
+            if (value == 10)
+                return output + color + "x" + "\033[0m";
+            else if (value == 11)
+                return output + color + "<>" + "\033[0m";
+            else if (value == 12)
+                return output + color + "+2" + "\033[0m";
+            else if (value == 13)
+                return output + color + "w" + "\033[0m";
+            else if (value == 14)
+                return output + color + "+4" + "\033[0m";
+            else
+                return output +color + String.valueOf(value) + "\033[0m";
+        } else {
+            return "\033[37;1mu\033[0m";
         }
     }
 }

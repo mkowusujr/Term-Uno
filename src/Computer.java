@@ -59,16 +59,16 @@ public class Computer extends Player {
                 System.out.print("Changing the color to ");
                 switch (color) {
                     case 'r':
-                        System.out.println("red");
+                        System.out.println("\033[31;1mred\033[0m");
                         break;
                     case 'b':
-                        System.out.println("blue");
+                        System.out.println("\033[34;1mblue\033[0m");
                         break;
                     case 'g':
-                        System.out.println("green");
+                        System.out.println("\033[32;1mgreen\033[0m");
                         break;
                     case 'y':
-                        System.out.println("yellow");
+                        System.out.println("\033[33;1myellow\033[0m");
                         break;
                 }
                 discardTop.changeColor(color);
