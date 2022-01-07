@@ -59,6 +59,8 @@ public class Human extends Player {
             }
             if (!playCard.equals("draw"))
                 System.out.println("Play a different Card");
+            else
+                return null;
         } while (!playCard.equals("draw"));
         return playedCard;
     }

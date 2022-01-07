@@ -12,7 +12,12 @@ public class Computer extends Player {
     @Override
     String displayHand() {
         // TODO Auto-generated method stub
-        return null;
+        String output = "";
+        for (Card card : handCards) {
+            output += "u";
+            output += " ";
+        }
+        return output;
     }
 
     @Override
