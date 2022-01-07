@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.lang.Thread;
 
 public class Human extends Player {
     private static Scanner kb;
@@ -6,6 +7,14 @@ public class Human extends Player {
     public Human() {
         super();
         kb = new Scanner(System.in);
+    }
+
+    private void movingTime(){
+        try {
+            Thread.sleep(1000);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 
     private Card discardFromHand(String card) {
@@ -23,6 +32,7 @@ public class Human extends Player {
         // String move = kb.nextLine();
         if (move.equals("draw")) {
             System.out.println("Drawing card from deck...");
+            movingTime();
             Card drawn = playingDeck.drawCard();
             drawn.flipCard();
             handCards.add(drawn);
@@ -44,11 +54,28 @@ public class Human extends Player {
             playCard = kb.nextLine();
             playedCard = this.pickCard(playingDeck, playCard);
             if (playedCard != null && playedCard.canPlayCard(playingDeck, this)) {
+                movingTime();
                 if (playingDeck.getTopOfDiscardDeck().getValue() > 12) {
                     System.out.println("What color would you like change it too");
                     System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
                     String color = kb.nextLine();
                     Card discardTop = playingDeck.getTopOfDiscardDeck();
+                    movingTime();
+                    System.out.print("Changing the color to ");
+                    switch (color.charAt(0)) {
+                        case 'r':
+                            System.out.println("red");
+                            break;
+                        case 'b':
+                            System.out.println("blue");
+                            break;
+                        case 'g':
+                            System.out.println("green");
+                            break;
+                        case 'y':
+                            System.out.println("yellow");
+                            break;
+                    }
                     discardTop.changeColor(color);
                 }
                 break;

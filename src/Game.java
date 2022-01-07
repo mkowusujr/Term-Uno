@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.lang.Thread;
 
 public class Game {
     private Deck gameDeck;
@@ -10,11 +12,11 @@ public class Game {
         gameDeck = new Deck();
         ArrayList<Card> deltCards;
 
-        players = new Player[numPlayers];
-        //for (int i = 0; i < players.length; i++) {
-            players[0] = new Human();
-            players[1] = new Computer();
-        //}
+        players = new Player[numPlayers+1];
+        players[0] = new Human();
+        for (int i = 1; i < players.length; i++) {
+            players[i] = new Computer();
+        }
         for (Player player : players) {
             deltCards = gameDeck.dealPlayingDeck(cardsAtStart);
             player.receiveHand(deltCards);
@@ -108,7 +110,7 @@ public class Game {
             return playGame(nextPos);
         } else if (player.getHandCount() == 0) {
             player.gameOverAction();
-            return ("player " + startingPlayer + " wins!");
+            return ("player " + (startingPlayer + 1) + " wins!");
         } else {
             nextPos = whoGoesNext(startingPlayer, skip);
             if (skip == true) {
@@ -116,6 +118,12 @@ public class Game {
                         " got skipped!");
             }
             System.out.println("\n");
+            // Wait a bit before moving on
+            try {
+                Thread.sleep(500);
+            } catch (Exception e) {
+                System.out.println(e);
+            }
             return playGame(nextPos);
         }
     }
@@ -125,8 +133,14 @@ public class Game {
     }
 
     public static void main(String[] args) {
-        Game newGame = new Game(2, 7);
+        Scanner kb = new Scanner(System.in);
+        System.out.print("How many computer opponents do you want to play (1-7): ");
+        int numOfPlayers = kb.nextInt();
+        System.out.print("How cards do you want to start with: ");
+        int numOfCards = kb.nextInt();
+        Game newGame = new Game(numOfPlayers, numOfCards);
         System.out.println("Round " + newGame.currentRound());
         System.out.println(newGame.playGame(0));
+        kb.close();
     }
 }

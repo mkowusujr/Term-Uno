@@ -20,8 +20,18 @@ public class Card {
         faceUp = !faceUp;
     }
 
+    public char getColor(){
+        return color;
+    }
+
     public int getValue() {
         return value;
+    }
+
+    public void changeColor(char color) {
+        if (value > 12) {
+            this.color = color;
+        }
     }
 
     public void changeColor(String color) {
