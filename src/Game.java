@@ -63,7 +63,7 @@ public class Game {
         System.out.printf("It is %s Turn!\n", p);
         System.out.printf("%s Hand is: %s\n", p, player.displayHand());
         Card discardTop = gameDeck.getTopOfDiscardDeck();
-        System.out.println("Top of the Discard Pile is a " + discardTop + " card");
+        System.out.println("The top of the Discard Pile is a " + discardTop + " card");
         if (player.isHuman()) {
             System.out.print("Play a card... ");
         } else {
