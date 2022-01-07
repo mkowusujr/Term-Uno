@@ -30,8 +30,8 @@ public class Card {
         }
     }
 
-    public boolean canPlayCard(Deck playingDeck, Player player){
-        if (this.equals(playingDeck.getTopOfDiscardDeck())){
+    public boolean canPlayCard(Deck playingDeck, Player player) {
+        if (this.equals(playingDeck.getTopOfDiscardDeck())) {
             System.out.println("You played a " + this + " card");
             playingDeck.addToDiscardCard(this);
             return true;

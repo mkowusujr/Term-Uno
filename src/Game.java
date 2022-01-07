@@ -12,7 +12,7 @@ public class Game {
 
         players = new Player[numPlayers];
         for (int i = 0; i < players.length; i++) {
-            players[i] = new Player();
+            players[i] = new Human();
         }
         for (Player player : players) {
             deltCards = gameDeck.dealPlayingDeck(cardsAtStart);
@@ -22,32 +22,6 @@ public class Game {
         clockwise = true;
         round += 1;
     }
-
-    public void humanMove(Player player, Scanner kb) {
-        String playCard = "";
-        do {
-            playCard = kb.nextLine();
-            Card playedCard = player.playCard(gameDeck, playCard);
-            if (playedCard.canPlayCard(gameDeck, player)) {
-                if (gameDeck.getTopOfDiscardDeck().getValue() > 12) {
-                    System.out.println("What color would you like change it too");
-                    System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
-                    String color = kb.nextLine();
-                    Card discardTop = gameDeck.getTopOfDiscardDeck();
-                    discardTop.changeColor(color);
-                }
-                break;
-            } else {
-                System.out.println("You can't play that card");
-            }
-        } while (!playCard.equals("draw"));
-    }
-
-    /*
-     * private void aiMove(){
-     * // TODO write ai
-     * }
-     */
 
     private int nextPlayer(int lastPos) {
         int currentPos = lastPos;
@@ -86,9 +60,7 @@ public class Game {
         System.out.println("It is player number " + (startingPlayer + 1) + "'s turn!");
         System.out.println("Your current hand is: " + player.displayHand());
 
-        // make player move
-        humanMove(player, kb);
-        Card cardPlayed = gameDeck.getTopOfDiscardDeck();
+        Card cardPlayed = player.playCard(gameDeck); // gameDeck.getTopOfDiscardDeck();
         int topCardVal = cardPlayed.getValue();
         if (topCardVal > 9) { // Special card played
             int nextPlayer;
@@ -99,6 +71,12 @@ public class Game {
                     break;
                 case 11: // reverse card
                     clockwise = !clockwise;
+                    System.out.print("The direction got reverse, we are now playing ");
+                    if (clockwise)
+                        System.out.println("clockwise");
+                    else
+                        System.out.println("counter-clockwise");
+
                     break;
                 case 12: // draw two card
                     nextPlayer = nextPlayer(startingPlayer);
@@ -123,9 +101,13 @@ public class Game {
             nextPos = whoGoesNext(startingPlayer, skip);
             return playGame(nextPos, kb);
         } else if (player.getHandCount() == 0) {
+            player.gameOverAction();
             return ("player " + startingPlayer + " wins!");
         } else {
             nextPos = whoGoesNext(startingPlayer, skip);
+            if (skip == true) {
+                System.out.println("\nPlayer " + nextPos + "got skipped!");
+            }
             System.out.println("\n");
             return playGame(nextPos, kb);
         }
