@@ -3,7 +3,6 @@ import java.util.*;
 public class Deck {
     ArrayList<Card> playingDeck;
     ArrayList<Card> discardDeck;
-    // private final int MAX_SIZE = 108;
     private final char[] colors = { 'r', 'g', 'b', 'y' };
 
     private void unboxDeck() {

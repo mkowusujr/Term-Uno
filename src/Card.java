@@ -42,7 +42,13 @@ public class Card {
 
     public boolean canPlayCard(Deck playingDeck, Player player) {
         if (this.equals(playingDeck.getTopOfDiscardDeck())) {
-            System.out.println("You played a " + this + " card");
+            String pType;
+            if (player.isHuman()) {
+                pType = "You played";
+            } else {
+                pType = "Played";
+            }
+            System.out.printf("%s a %s card\n", pType, this);
             playingDeck.addToDiscardCard(this);
             return true;
         } else {
@@ -116,7 +122,7 @@ public class Card {
             else if (value == 14)
                 return output + color + "+4" + "\033[0m";
             else
-                return output +color + String.valueOf(value) + "\033[0m";
+                return output + color + String.valueOf(value) + "\033[0m";
         } else {
             return "\033[37;1mu\033[0m";
         }

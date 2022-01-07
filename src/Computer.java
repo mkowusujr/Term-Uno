@@ -28,19 +28,26 @@ public class Computer extends Player {
                 playable.add(card);
             }
         }
+        String action = "";
         if (playable.size() == 0) {
             think();
-            System.out.println("No playable card, drawing from deck...");
+            System.out.println("Had no playable card in hand, drawing from deck...");
             Card drawn = playingDeck.drawCard();
             drawn.flipCard();
             playable.add(drawn);
+            action += "Drew a ";
+        } else {
+            // action += "Picked";
         }
         // choose the best card to play
         Card chosenCard = playable.get(0);
-        System.out.println("Picked " + chosenCard);
+        if (action.equals("Drew a ")) {
+            System.out.print(action + chosenCard + " card, ");
+        }
+
         for (Card card : handCards) {
             if (chosenCard.toString().equals(card.toString())) {
-                System.out.println("Playing " + card);
+                //System.out.println("Playing " + card);
                 handCards.remove(card);
                 break;
             }
@@ -75,10 +82,15 @@ public class Computer extends Player {
             }
             // playingDeck.addToDiscardCard(chosenCard);
         } else {
-            System.out.println("Can't play that");
+            System.out.println("But couldn't play the " +chosenCard + " card");
             chosenCard = null;
         }
         return chosenCard;
+    }
+
+    @Override
+    boolean isHuman() {
+        return false;
     }
 
     @Override

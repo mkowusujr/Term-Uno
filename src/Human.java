@@ -9,7 +9,7 @@ public class Human extends Player {
         kb = new Scanner(System.in);
     }
 
-    private void movingTime(){
+    private void movingTime() {
         try {
             Thread.sleep(1000);
         } catch (Exception e) {
@@ -37,12 +37,12 @@ public class Human extends Player {
             drawn.flipCard();
             handCards.add(drawn);
             move = drawn.stringVal();
-            System.out.println("You drew a " + drawn + " card");
+            System.out.print("You drew a " + drawn + " card, ");
         }
 
         Card card = discardFromHand(move);
-        if (card == null)
-            handCards.remove(handCards.size() - 1);
+        //if (card == null)
+            //handCards.remove(handCards.size() - 1);
         return card;
     }
 
@@ -64,19 +64,19 @@ public class Human extends Player {
                     System.out.print("Changing the color to ");
                     switch (color.charAt(0)) {
                         case 'r':
-                        System.out.println("\033[31;1mred\033[0m");
-                        break;
-                    case 'b':
-                        System.out.println("\033[34;1mblue\033[0m");
-                        break;
-                    case 'g':
-                        System.out.println("\033[32;1mgreen\033[0m");
-                        break;
-                    case 'y':
-                        System.out.println("\033[33;1myellow\033[0m");
-                        break;
-                }
-                discardTop.changeColor(color);
+                            System.out.println("\033[31;1mred\033[0m");
+                            break;
+                        case 'b':
+                            System.out.println("\033[34;1mblue\033[0m");
+                            break;
+                        case 'g':
+                            System.out.println("\033[32;1mgreen\033[0m");
+                            break;
+                        case 'y':
+                            System.out.println("\033[33;1myellow\033[0m");
+                            break;
+                    }
+                    discardTop.changeColor(color);
                 }
                 break;
             } else if (playedCard == null) {
@@ -90,6 +90,11 @@ public class Human extends Player {
                 return null;
         } while (!playCard.equals("draw"));
         return playedCard;
+    }
+
+    @Override
+    boolean isHuman() {
+        return true;
     }
 
     @Override

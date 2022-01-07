@@ -22,10 +22,11 @@ public abstract class Player {
         return handCards.size();
     }
 
-    
     abstract Card playCard(Deck playingDeck);
 
     abstract String displayHand();
 
     abstract void gameOverAction();
+
+    abstract boolean isHuman();
 }

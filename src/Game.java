@@ -6,13 +6,12 @@ public class Game {
     private Deck gameDeck;
     private Player[] players;
     private boolean clockwise;
-    private int round;
 
     public Game(int numPlayers, int cardsAtStart) {
         gameDeck = new Deck();
         ArrayList<Card> deltCards;
 
-        players = new Player[numPlayers+1];
+        players = new Player[numPlayers + 1];
         players[0] = new Human();
         for (int i = 1; i < players.length; i++) {
             players[i] = new Computer();
@@ -23,7 +22,6 @@ public class Game {
         }
         gameDeck.playDeck();
         clockwise = true;
-        round += 1;
     }
 
     private int nextPlayer(int lastPos) {
@@ -53,18 +51,32 @@ public class Game {
         }
     }
 
+    private void display(int startingPlayer) {
+        Player player = players[startingPlayer];
+        String p;
+        if (player.isHuman()) {
+            p = "Your";
+        } else {
+            p = "Player " + (startingPlayer + 1) + "'s";
+        }
+        // System.out.println(gameDeck);
+        System.out.printf("It is %s Turn!\n", p);
+        System.out.printf("%s Hand is: %s\n", p, player.displayHand());
+        Card discardTop = gameDeck.getTopOfDiscardDeck();
+        System.out.println("Top of the Discard Pile is a " + discardTop + " card");
+        if (player.isHuman()) {
+            System.out.print("Play a card... ");
+        } else {
+            System.out.println("Play a card...");
+        }
+    }
+
     public String playGame(int startingPlayer) {
 
         boolean skip = false;
         int nextPos;
         Player player = players[startingPlayer];
-
-        System.out.println(gameDeck);
-        System.out.println("It is player number " + (startingPlayer + 1) +
-                "'s turn!");
-        System.out.printf("Player %d current hand is: %s\n", (startingPlayer + 1),
-                player.displayHand());
-        System.out.println("Play a card");
+        display(startingPlayer);
         Card cardPlayed = player.playCard(gameDeck); // gameDeck.getTopOfDiscardDeck();
         if (cardPlayed != null) {
             int topCardVal = cardPlayed.getValue();
@@ -128,18 +140,14 @@ public class Game {
         }
     }
 
-    public int currentRound() {
-        return round;
-    }
-
     public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
         System.out.print("How many computer opponents do you want to play (1-7): ");
         int numOfPlayers = kb.nextInt();
         System.out.print("How cards do you want to start with: ");
         int numOfCards = kb.nextInt();
+        System.out.println();
         Game newGame = new Game(numOfPlayers, numOfCards);
-        System.out.println("Round " + newGame.currentRound());
         System.out.println(newGame.playGame(0));
         kb.close();
     }
