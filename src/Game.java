@@ -11,9 +11,10 @@ public class Game {
         ArrayList<Card> deltCards;
 
         players = new Player[numPlayers];
-        for (int i = 0; i < players.length; i++) {
-            players[i] = new Human();
-        }
+        //for (int i = 0; i < players.length; i++) {
+            players[0] = new Human();
+            players[1] = new Computer();
+        //}
         for (Player player : players) {
             deltCards = gameDeck.dealPlayingDeck(cardsAtStart);
             player.receiveHand(deltCards);
