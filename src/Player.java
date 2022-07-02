@@ -22,6 +22,7 @@ public abstract class Player {
 
     /**
      * Adds the list oof cards being distributed into the Player Object's hand 
+     * 
      * @param dealtCards The cards being distributed
      */
     public void addToHand(ArrayList<Card> dealtCards) {
@@ -33,6 +34,7 @@ public abstract class Player {
 
     /**
      * Adds the card into the Player Object's hand
+     * 
      * @param card The card being distributed
      */
     public void addToHand(Card card) {
@@ -49,6 +51,7 @@ public abstract class Player {
 
     /**
      * How the Player Object will choose their next playing card
+     * 
      * @param playingDeck The deck of cards being drawn from
      * @param discardDeck The deck of cards being used to store the cards
      *      being discarded during the game

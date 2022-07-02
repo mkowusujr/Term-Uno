@@ -2,6 +2,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.lang.Thread;
 
+/**
+ * 
+ * 
+ * @author Mathew Owusu Jr
+ */
 public class Game {
     private PlayingDeck playingDeck;
     private DiscardDeck discardDeck;
@@ -64,7 +69,7 @@ public class Game {
         // System.out.println(playingDeck);
         System.out.printf("It is %s Turn!\n", p);
         System.out.printf("%s Hand is: %s\n", p, player.displayHand());
-        Card discardTop = discardDeck.getTopOfDiscardDeck();
+        Card discardTop = discardDeck.getTopOfDeck();
         System.out.println("The top of the Discard Pile is a " + discardTop + " card");
         if (player.isHuman()) {
             System.out.print("Play a card... ");
@@ -79,7 +84,7 @@ public class Game {
         int nextPos;
         Player player = players[startingPlayer];
         display(startingPlayer);
-        Card cardPlayed = player.playCard(playingDeck, discardDeck); // playingDeck.getTopOfDiscardDeck();
+        Card cardPlayed = player.playCard(playingDeck, discardDeck); // playingDeck.getTopOfDeck();
         if (cardPlayed != null) {
             int topCardVal = cardPlayed.getValue();
             if (topCardVal > 9) { // Special card played

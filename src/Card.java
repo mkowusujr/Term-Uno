@@ -1,6 +1,5 @@
 /**
  * The Uno Card Class
- * 
  * @author Mathew Owusu Jr
  */
 public class Card {
@@ -53,6 +52,7 @@ public class Card {
 
     /**
      * Gets the cards value
+     * 
      * @return A number representing what tyoe of card this is
      *      values 1-9 are uno cards 1-9
      *      value 10 represents a skip card, 11 is a reverse card,
@@ -68,6 +68,7 @@ public class Card {
      * value greater than 12. This means you can only change the color
      * of a wild card, which has a value of 13, and a plus four card,
      * which has a value of 14
+     * 
      * @param color is the first letter of the card's color
      *      acceptable color values are 'r' for red,
      *      'b' for blue, 'g' for green, 'y' for yellow, and
@@ -85,6 +86,7 @@ public class Card {
      * of a wild card, which has a value of 13, and a plus four card,
      * which has a value of 14. This function is for cases were the user types
      * in the colors full name
+     * 
      * @param color is the first letter of the card's color
      *      acceptable color values are 'r' for red,
      *      'b' for blue, 'g' for green, 'y' for yellow, and
@@ -98,6 +100,7 @@ public class Card {
 
     /**
      * Whether or not this card can be played on top of the discard deck
+     * 
      * @param discardDeck The deck of cards being used to store the cards
      *      being discarded during the game
      * @param player the player playing the current card
@@ -105,7 +108,7 @@ public class Card {
      *      card on top of the discard deck
      */
     public boolean canPlayCard(DiscardDeck discardDeck, Player player) {
-        if (this.equals(discardDeck.getTopOfDiscardDeck())) {
+        if (this.equals(discardDeck.getTopOfDeck())) {
             String pType;
             if (player.isHuman()) {
                 pType = "You played";
@@ -113,7 +116,7 @@ public class Card {
                 pType = "Played";
             }
             System.out.printf("%s a %s card\n", pType, this);
-            discardDeck.addToDiscardCard(this);
+            discardDeck.addToDeck(this);
             return true;
         } else {
             player.addToHand(this);
@@ -141,6 +144,7 @@ public class Card {
     /**
      * Converts the card values to a string representing
      * it's card type
+     * 
      * @return A string representing the card's current face
      */
     public String displayCard() {

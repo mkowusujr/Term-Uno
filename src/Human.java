@@ -13,7 +13,7 @@ public class Human extends Player {
     private static Scanner kb;
 
     /**
-     * Class Constructor
+     * Class Constructor.
      * Initializes the scanner for user input
      */
     public Human() {
@@ -33,7 +33,8 @@ public class Human extends Player {
     }
 
     /**
-     * Removes the card the user wants to discard from their deck
+     * Removes the card the user wants to discard from their 
+     * 
      * @param card The card that the user plays to discard
      * @return The card being discard for the user's hand or null if the
      *      user doesn't have the card or typed the card incorrectly
@@ -59,6 +60,7 @@ public class Human extends Player {
      * If the User chooses to not draw, but rather play a card in their hand,
      * this function will fetch the card from their hand and discard it if it
      * exists
+     * 
      * @param playingDeck The playing deck for the game. The user can draw
      *      from it if they don't have a playable card
      * @param move The action the user wants to make. It can either be the 
@@ -85,6 +87,7 @@ public class Human extends Player {
     /**
      * Changes the color of the card last played. Used in cases where a user
      * just played a Wild Card or a Plus Four Card
+     * 
      * @param discardDeck The deck of cards being used to store the cards
      *      being discarded during the game
      */
@@ -92,7 +95,7 @@ public class Human extends Player {
         System.out.println("What color would you like change it too");
                     System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
                     String color = kb.nextLine();
-                    Card discardTop = discardDeck.getTopOfDiscardDeck();
+                    Card discardTop = discardDeck.getTopOfDeck();
                     movingTime();
                     System.out.print("Changing the color to ");
                     switch (color.charAt(0)) {
@@ -135,12 +138,12 @@ public class Human extends Player {
             if (playedCard != null && playedCard.canPlayCard(discardDeck, this)) {
                 movingTime();
                 // If User plays a card that can change color
-                if (discardDeck.getTopOfDiscardDeck().getValue() > 12) {
+                if (discardDeck.getTopOfDeck().getValue() > 12) {
                     changeSpecialCardColor(discardDeck);
                     // System.out.println("What color would you like change it too");
                     // System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
                     // String color = kb.nextLine();
-                    // Card discardTop = discardDeck.getTopOfDiscardDeck();
+                    // Card discardTop = discardDeck.getTopOfDeck();
                     // movingTime();
                     // System.out.print("Changing the color to ");
                     // switch (color.charAt(0)) {

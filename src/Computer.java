@@ -1,6 +1,11 @@
 import java.util.ArrayList;
 import java.lang.Thread;
 
+/**
+ * 
+ * 
+ * @author Mathew Owusu Jr
+ */
 public class Computer extends Player {
     public Computer() {
         super();
@@ -18,7 +23,7 @@ public class Computer extends Player {
 
     @Override
     Card playCard(PlayingDeck playingDeck, DiscardDeck discardDeck) {
-        Card lastPlayed = discardDeck.getTopOfDiscardDeck();
+        Card lastPlayed = discardDeck.getTopOfDeck();
         // Pick a card
         ArrayList<Card> playable = new ArrayList<Card>();
         // create a list of playable cards
@@ -55,13 +60,13 @@ public class Computer extends Player {
         think();
         if (chosenCard.canPlayCard(discardDeck, this)) {
             // cases where a color changing card is played
-            if (discardDeck.getTopOfDiscardDeck().getValue() > 12) {
+            if (discardDeck.getTopOfDeck().getValue() > 12) {
                 char color = 's';
                 for (Card card : handCards) {
                     if (card.getColor() != 's')
                         color = handCards.get(0).getColor();
                 }
-                Card discardTop = discardDeck.getTopOfDiscardDeck();
+                Card discardTop = discardDeck.getTopOfDeck();
                 think();
                 System.out.print("Changing the color to ");
                 switch (color) {
@@ -80,7 +85,6 @@ public class Computer extends Player {
                 }
                 discardTop.changeColor(color);
             }
-            // playingDeck.addToDiscardCard(chosenCard);
         } else {
             System.out.println("But couldn't play the " +chosenCard + " card");
             chosenCard = null;
