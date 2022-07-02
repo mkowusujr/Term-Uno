@@ -88,7 +88,7 @@ public class Human extends Player {
      * @param discardDeck The deck of cards being used to store the cards
      *      being discarded during the game
      */
-    private void changeSpecialCardColor(PlayingDeck discardDeck){
+    private void changeSpecialCardColor(DiscardDeck discardDeck){
         System.out.println("What color would you like change it too");
                     System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
                     String color = kb.nextLine();
@@ -126,12 +126,12 @@ public class Human extends Player {
      * prompt the user for what they want to do next.
      */
     @Override
-    Card playCard(PlayingDeck discardDeck) {
+    Card playCard(PlayingDeck playingDeck, DiscardDeck discardDeck) {
         Card playedCard = null;
         String move = "";
         do {
             move = kb.nextLine();
-            playedCard = this.pickCard(discardDeck, move);
+            playedCard = this.pickCard(playingDeck, move);
             if (playedCard != null && playedCard.canPlayCard(discardDeck, this)) {
                 movingTime();
                 // If User plays a card that can change color

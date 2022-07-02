@@ -1,7 +1,7 @@
 import java.util.*;
 
 /**
- * The Class representing the full Deck of Uno cards
+ * The Class representing the Playing Deck, also know as the draw pile
  * 
  * @author Mathew Owusu Jr
  */
@@ -9,11 +9,11 @@ public class PlayingDeck {
     /**
      * The deck cards are drew from
      */
-    ArrayList<Card> playingDeck;
+    private ArrayList<Card> playingDeck;
     /**
      * The deck cards are discarded into
      */
-    ArrayList<Card> discardDeck;
+    // ArrayList<Card> discardDeck;
     /**
      * The allowed colors a card can be in the deck
      */
@@ -45,7 +45,7 @@ public class PlayingDeck {
     public PlayingDeck() {
         unboxDeck();
         Collections.shuffle(playingDeck);
-        discardDeck = new ArrayList<Card>();
+        // discardDeck = new ArrayList<Card>();
     }
 
     public Card drawCard() {
@@ -56,22 +56,22 @@ public class PlayingDeck {
         return playingDeck.size();
     }
 
-    public void playDeck() {
-        discardDeck.add(drawCard());
-        discardDeck.get(discardDeck.size() - 1).flipCard();
+    // public void playDeck() {
+    //     discardDeck.add(drawCard());
+    //     discardDeck.get(discardDeck.size() - 1).flipCard();
 
-        if (getTopOfDiscardDeck().getValue() > 9) {
-            playDeck();
-        }
-    }
+    //     if (getTopOfDiscardDeck().getValue() > 9) {
+    //         playDeck();
+    //     }
+    // }
 
     public Card getTopOfDeck() {
         return playingDeck.get(playingDeck.size() - 1);
     }
 
-    public Card getTopOfDiscardDeck() {
-        return discardDeck.get(discardDeck.size() - 1);
-    }
+    // public Card getTopOfDiscardDeck() {
+    //     return discardDeck.get(discardDeck.size() - 1);
+    // }
 
     public ArrayList<Card> dealPlayingDeck(int cardAmount) {
         ArrayList<Card> hand = new ArrayList<Card>();
@@ -81,22 +81,26 @@ public class PlayingDeck {
         return hand;
     }
 
-    public void addToDiscardCard(Card card) {
-        discardDeck.add(card);
-    }
+    // public void addToDiscardCard(Card card) {
+    //     discardDeck.add(card);
+    // }
 
-    private void resetDeck() {
-        for (Card card : discardDeck) {
+    public void resetDeck(DiscardDeck discardDeck) {
+        System.out.println("Emptying, adding discard deck back in");
+        // for (Card card : discardDeck.getDiscardDeck()) {
+        for (int i = discardDeck.deckSize(); i >= 0; i--){
+            Card card = discardDeck.getTopOfDiscardDeck();
             card.flipCard();
             playingDeck.add(card);
+            discardDeck.removeTopCard();
         }
         Collections.shuffle(playingDeck);
     }
 
     public boolean isEmpty() {
         if (playingDeck.size() == 0) {
-            System.out.println("Emptying, adding discard deck back in");
-            resetDeck();
+            // System.out.println("Emptying, adding discard deck back in");
+            // resetDeck();
             return true;
         } else {
             return false;
@@ -104,12 +108,12 @@ public class PlayingDeck {
 
     }
 
-    @Override
-    public String toString() {
-        String output = "";
-        output += getTopOfDeck().toString();
-        output += "...";
-        output += getTopOfDiscardDeck().toString();
-        return output;
-    }
+    // @Override
+    // public String toString() {
+    //     String output = "";
+    //     output += getTopOfDeck().toString();
+    //     output += "...";
+    //     output += getTopOfDiscardDeck().toString();
+    //     return output;
+    // }
 }

@@ -3,12 +3,13 @@ import java.util.Scanner;
 import java.lang.Thread;
 
 public class Game {
-    private PlayingDeck gameDeck;
+    private PlayingDeck playingDeck;
+    private DiscardDeck discardDeck;
     private Player[] players;
     private boolean clockwise;
 
     public Game(int numPlayers, int cardsAtStart) {
-        gameDeck = new PlayingDeck();
+        playingDeck = new PlayingDeck();
         ArrayList<Card> dealtCards;
 
         players = new Player[numPlayers + 1];
@@ -17,10 +18,11 @@ public class Game {
             players[i] = new Computer();
         }
         for (Player player : players) {
-            dealtCards = gameDeck.dealPlayingDeck(cardsAtStart);
+            dealtCards = playingDeck.dealPlayingDeck(cardsAtStart);
             player.addToHand(dealtCards);
         }
-        gameDeck.playDeck();
+        // playingDeck.playDeck();
+        discardDeck = new DiscardDeck(playingDeck);
         clockwise = true;
     }
 
@@ -59,10 +61,10 @@ public class Game {
         } else {
             p = "Player " + (startingPlayer + 1) + "'s";
         }
-        // System.out.println(gameDeck);
+        // System.out.println(playingDeck);
         System.out.printf("It is %s Turn!\n", p);
         System.out.printf("%s Hand is: %s\n", p, player.displayHand());
-        Card discardTop = gameDeck.getTopOfDiscardDeck();
+        Card discardTop = discardDeck.getTopOfDiscardDeck();
         System.out.println("The top of the Discard Pile is a " + discardTop + " card");
         if (player.isHuman()) {
             System.out.print("Play a card... ");
@@ -77,7 +79,7 @@ public class Game {
         int nextPos;
         Player player = players[startingPlayer];
         display(startingPlayer);
-        Card cardPlayed = player.playCard(gameDeck); // gameDeck.getTopOfDiscardDeck();
+        Card cardPlayed = player.playCard(playingDeck, discardDeck); // playingDeck.getTopOfDiscardDeck();
         if (cardPlayed != null) {
             int topCardVal = cardPlayed.getValue();
             if (topCardVal > 9) { // Special card played
@@ -98,7 +100,7 @@ public class Game {
                         break;
                     case 12: // draw two card
                         nextPlayer = nextPlayer(startingPlayer);
-                        dealtCards = gameDeck.dealPlayingDeck(2);
+                        dealtCards = playingDeck.dealPlayingDeck(2);
                         players[nextPlayer].addToHand(dealtCards);
                         skip = true;
                         break;
@@ -106,7 +108,7 @@ public class Game {
                         break;
                     case 14: // draw 4 wild card
                         nextPlayer = nextPlayer(startingPlayer);
-                        dealtCards = gameDeck.dealPlayingDeck(4);
+                        dealtCards = playingDeck.dealPlayingDeck(4);
                         players[nextPlayer].addToHand(dealtCards);
                         skip = true;
                         break;

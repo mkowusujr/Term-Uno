@@ -49,11 +49,12 @@ public abstract class Player {
 
     /**
      * How the Player Object will choose their next playing card
+     * @param playingDeck The deck of cards being drawn from
      * @param discardDeck The deck of cards being used to store the cards
      *      being discarded during the game
      * @return The card the Player is discarding from their hand
      */
-    abstract Card playCard(PlayingDeck discardDeck);
+    abstract Card playCard(PlayingDeck playingDeck, DiscardDeck discardDeck);
 
     /**
      * How the Player Object will display their hand

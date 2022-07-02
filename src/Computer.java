@@ -17,8 +17,8 @@ public class Computer extends Player {
     }
 
     @Override
-    Card playCard(PlayingDeck playingDeck) {
-        Card lastPlayed = playingDeck.getTopOfDiscardDeck();
+    Card playCard(PlayingDeck playingDeck, DiscardDeck discardDeck) {
+        Card lastPlayed = discardDeck.getTopOfDiscardDeck();
         // Pick a card
         ArrayList<Card> playable = new ArrayList<Card>();
         // create a list of playable cards
@@ -53,15 +53,15 @@ public class Computer extends Player {
             }
         }
         think();
-        if (chosenCard.canPlayCard(playingDeck, this)) {
+        if (chosenCard.canPlayCard(discardDeck, this)) {
             // cases where a color changing card is played
-            if (playingDeck.getTopOfDiscardDeck().getValue() > 12) {
+            if (discardDeck.getTopOfDiscardDeck().getValue() > 12) {
                 char color = 's';
                 for (Card card : handCards) {
                     if (card.getColor() != 's')
                         color = handCards.get(0).getColor();
                 }
-                Card discardTop = playingDeck.getTopOfDiscardDeck();
+                Card discardTop = discardDeck.getTopOfDiscardDeck();
                 think();
                 System.out.print("Changing the color to ");
                 switch (color) {

@@ -8,13 +8,14 @@ public class DiscardDeck {
     /**
      * The deck cards are discarded into
      */
-    ArrayList<Card> discardDeck;
+    private ArrayList<Card> discardDeck;
 
     /**
      * The Class Constructor.
      * Starts the discard pile
      */
     public DiscardDeck(PlayingDeck playingDeck) {
+        discardDeck = new ArrayList<Card>();
         createDiscardPile(playingDeck);
     }
     
@@ -24,7 +25,7 @@ public class DiscardDeck {
      * of a card the first card played must be a number from 0-9
      * @param playingDeck  The playing deck for the game.
      */
-    private void createDiscardPile (PlayingDeck playingDeck) {
+    private void createDiscardPile(PlayingDeck playingDeck) {
         discardDeck.add(playingDeck.drawCard());
         discardDeck.get(discardDeck.size() - 1).flipCard();
     
@@ -47,5 +48,24 @@ public class DiscardDeck {
      */
     public void addToDiscardCard(Card card) {
         discardDeck.add(card);
+    }
+
+    /**
+     * Gets the entire discard deck
+     * @return The list of cards making up the discard deck
+     */
+    public ArrayList<Card> getDiscardDeck() {
+        return discardDeck;
+    }
+
+    /**
+     * Removes the card at the top of the discardd deck
+     */
+    public void removeTopCard() {
+        discardDeck.remove(discardDeck.size() - 1);
+    }
+
+    public int deckSize() {
+        return discardDeck.size();
     }
 }
