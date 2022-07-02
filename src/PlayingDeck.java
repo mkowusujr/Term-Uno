@@ -1,4 +1,5 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * The Class representing the Playing Deck, also know as the draw pile
@@ -11,17 +12,25 @@ public class PlayingDeck {
      */
     private ArrayList<Card> playingDeck;
     /**
-     * The deck cards are discarded into
-     */
-    // ArrayList<Card> discardDeck;
-    /**
      * The allowed colors a card can be in the deck
      */
     private final char[] colors = { 'r', 'g', 'b', 'y' };
 
-    /** */
+    /**
+     * The Class Constructor.
+     * Creates and sets up the playing deck.
+     */
+    public PlayingDeck() {
+        unboxDeck();
+        Collections.shuffle(playingDeck);
+    }
+
+    /**
+     * Simulates creating a a full deck of Uno Cards
+     */
     private void unboxDeck() {
         playingDeck = new ArrayList<Card>();
+
         // Adding Zero Cards
         for (char color : colors) {
             playingDeck.add(new Card(color, 0));
@@ -42,54 +51,57 @@ public class PlayingDeck {
         }
     }
 
-    public PlayingDeck() {
-        unboxDeck();
-        Collections.shuffle(playingDeck);
-        // discardDeck = new ArrayList<Card>();
-    }
-
+    /**
+     * Draws a card from the top of the playing deck
+     * 
+     * @return The card drawn
+     */
     public Card drawCard() {
         return playingDeck.remove(playingDeck.size() - 1);
     }
 
+    /**
+     * Gets the current size of the playing Deck
+     * 
+     * @return An integer
+     */
     public int deckSize() {
         return playingDeck.size();
     }
 
-    // public void playDeck() {
-    //     discardDeck.add(drawCard());
-    //     discardDeck.get(discardDeck.size() - 1).flipCard();
-
-    //     if (getTopOfDiscardDeck().getValue() > 9) {
-    //         playDeck();
-    //     }
-    // }
-
+    /**
+     * Gets the card at the top of the playing deck
+     * 
+     * @return The card at the top of the playing deck
+     */
     public Card getTopOfDeck() {
         return playingDeck.get(playingDeck.size() - 1);
     }
 
-    // public Card getTopOfDiscardDeck() {
-    //     return discardDeck.get(discardDeck.size() - 1);
-    // }
-
+    /**
+     * Deals multiple cards from the playing deck
+     * 
+     * @param cardAmount The amount of cards being drawn from the playing deck
+     * @return A list of the cards drawn
+     */
     public ArrayList<Card> dealPlayingDeck(int cardAmount) {
-        ArrayList<Card> hand = new ArrayList<Card>();
+        ArrayList<Card> drawnCards = new ArrayList<Card>();
         for (int i = 0; i < cardAmount; i++) {
-            hand.add(drawCard());
+            drawnCards.add(drawCard());
         }
-        return hand;
+        return drawnCards;
     }
 
-    // public void addToDiscardCard(Card card) {
-    //     discardDeck.add(card);
-    // }
-
+    /**
+     * Setups of the playing deck again using the cards from the discard deck
+     * 
+     * @param discardDeck The deck of cards being used to store the cards
+     *      being discarded during the game
+     */
     public void resetDeck(DiscardDeck discardDeck) {
         System.out.println("Emptying, adding discard deck back in");
-        // for (Card card : discardDeck.getDiscardDeck()) {
         for (int i = discardDeck.deckSize(); i >= 0; i--){
-            Card card = discardDeck.getTopOfDiscardDeck();
+            Card card = discardDeck.getTopOfDeck();
             card.flipCard();
             playingDeck.add(card);
             discardDeck.removeTopCard();
@@ -97,23 +109,15 @@ public class PlayingDeck {
         Collections.shuffle(playingDeck);
     }
 
+    /**
+     * Whether or not the playing deck is empty
+     * @return true if playing deck is empty and false of it isn't
+     */
     public boolean isEmpty() {
         if (playingDeck.size() == 0) {
-            // System.out.println("Emptying, adding discard deck back in");
-            // resetDeck();
             return true;
         } else {
             return false;
         }
-
     }
-
-    // @Override
-    // public String toString() {
-    //     String output = "";
-    //     output += getTopOfDeck().toString();
-    //     output += "...";
-    //     output += getTopOfDiscardDeck().toString();
-    //     return output;
-    // }
 }
