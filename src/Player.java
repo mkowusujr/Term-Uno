@@ -9,7 +9,7 @@ public abstract class Player {
     /**
      * The list of cards in a PLayer Object's hand
      */
-    protected ArrayList<Card> handCards;
+    protected ArrayList<Card> cardsInHand;
 
     /**
      * Class constructor
@@ -17,7 +17,7 @@ public abstract class Player {
      * the PLayer object plays with
      */
     public Player() {
-        handCards = new ArrayList<Card>();
+        cardsInHand = new ArrayList<Card>();
     }
 
     /**
@@ -28,7 +28,7 @@ public abstract class Player {
     public void addToHand(ArrayList<Card> dealtCards) {
         for (Card card : dealtCards) {
             card.flipCard();
-            handCards.add(card);
+            cardsInHand.add(card);
         }
     }
 
@@ -38,7 +38,7 @@ public abstract class Player {
      * @param card The card being distributed
      */
     public void addToHand(Card card) {
-        handCards.add(card);
+        cardsInHand.add(card);
     }
 
     /**
@@ -46,7 +46,7 @@ public abstract class Player {
      * @return An integer
      */
     public int getHandCount() {
-        return handCards.size();
+        return cardsInHand.size();
     }
 
     /**
@@ -57,25 +57,25 @@ public abstract class Player {
      *      being discarded during the game
      * @return The card the Player is discarding from their hand
      */
-    abstract Card playCard(PlayingDeck playingDeck, DiscardDeck discardDeck);
+    public abstract Card makeMove(PlayingDeck playingDeck, DiscardDeck discardDeck);
 
     /**
      * How the Player Object will display their hand
      * @return The Player Objects hand as a string. If the Player is a Human
      *      Object the cards in their hand will be facing up. If the Player is
-     *      A Computer Object the cards in their hand will being facing down
+     *      a Computer Object the cards in their hand will being facing down
      */
-    abstract String displayHand();
+    public abstract String displayHand();
 
     /**
      * How the Player Object responds to a game over
      */
-    abstract void gameOverAction();
+    public abstract void gameOverAction();
 
     /**
      * Is the Player Object of the Human subclass
      * @return A boolean representing if the Player Object is a human (true)
      *      or not (false)
      */
-    abstract boolean isHuman();
+    public abstract boolean isHuman();
 }

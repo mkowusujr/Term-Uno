@@ -84,7 +84,7 @@ public class Game {
         int nextPos;
         Player player = players[startingPlayer];
         display(startingPlayer);
-        Card cardPlayed = player.playCard(playingDeck, discardDeck); // playingDeck.getTopOfDeck();
+        Card cardPlayed = player.makeMove(playingDeck, discardDeck); // playingDeck.getTopOfDeck();
         if (cardPlayed != null) {
             int topCardVal = cardPlayed.getValue();
             if (topCardVal > 9) { // Special card played

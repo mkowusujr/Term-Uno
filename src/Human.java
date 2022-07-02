@@ -43,9 +43,9 @@ public class Human extends Player {
         Card played = null;
 
         // Find the card the user wants to play
-        for (int i = 0; i < handCards.size(); i++) {
-            if (handCards.get(i).displayCard().equals(card)) {
-                played = handCards.remove(i);
+        for (int i = 0; i < cardsInHand.size(); i++) {
+            if (cardsInHand.get(i).displayCard().equals(card)) {
+                played = cardsInHand.remove(i);
                 break;
             }
         }
@@ -93,26 +93,26 @@ public class Human extends Player {
      */
     private void changeSpecialCardColor(DiscardDeck discardDeck){
         System.out.println("What color would you like change it too");
-                    System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
-                    String color = kb.nextLine();
-                    Card discardTop = discardDeck.getTopOfDeck();
-                    movingTime();
-                    System.out.print("Changing the color to ");
-                    switch (color.charAt(0)) {
-                        case 'r':
-                            System.out.println("\033[31;1mred\033[0m");
-                            break;
-                        case 'b':
-                            System.out.println("\033[34;1mblue\033[0m");
-                            break;
-                        case 'g':
-                            System.out.println("\033[32;1mgreen\033[0m");
-                            break;
-                        case 'y':
-                            System.out.println("\033[33;1myellow\033[0m");
-                            break;
-                    }
-                    discardTop.changeColor(color);
+        System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
+        String color = kb.nextLine();
+        Card lastPlayedCard = discardDeck.getTopOfDeck();
+        movingTime();
+        System.out.print("Changing the color to ");
+        switch (color.charAt(0)) {
+            case 'r':
+                System.out.println("\033[31;1mred\033[0m");
+                break;
+            case 'b':
+                System.out.println("\033[34;1mblue\033[0m");
+                break;
+            case 'g':
+                System.out.println("\033[32;1mgreen\033[0m");
+                break;
+            case 'y':
+                System.out.println("\033[33;1myellow\033[0m");
+                break;
+        }
+        lastPlayedCard.changeColor(color);
     }
 
     /**
@@ -129,44 +129,25 @@ public class Human extends Player {
      * prompt the user for what they want to do next.
      */
     @Override
-    Card playCard(PlayingDeck playingDeck, DiscardDeck discardDeck) {
+    public Card makeMove(PlayingDeck playingDeck, DiscardDeck discardDeck) {
         Card playedCard = null;
         String move = "";
         do {
             move = kb.nextLine();
             playedCard = this.pickCard(playingDeck, move);
-            if (playedCard != null && playedCard.canPlayCard(discardDeck, this)) {
+            if (playedCard == null) {
+                System.out.println("You don't have that card");
+            } 
+            else if (!playedCard.canPlayCard(discardDeck, this)) {
+                System.out.println("You can't play that card");
+            }
+            else {
                 movingTime();
                 // If User plays a card that can change color
                 if (discardDeck.getTopOfDeck().getValue() > 12) {
                     changeSpecialCardColor(discardDeck);
-                    // System.out.println("What color would you like change it too");
-                    // System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
-                    // String color = kb.nextLine();
-                    // Card discardTop = discardDeck.getTopOfDeck();
-                    // movingTime();
-                    // System.out.print("Changing the color to ");
-                    // switch (color.charAt(0)) {
-                    //     case 'r':
-                    //         System.out.println("\033[31;1mred\033[0m");
-                    //         break;
-                    //     case 'b':
-                    //         System.out.println("\033[34;1mblue\033[0m");
-                    //         break;
-                    //     case 'g':
-                    //         System.out.println("\033[32;1mgreen\033[0m");
-                    //         break;
-                    //     case 'y':
-                    //         System.out.println("\033[33;1myellow\033[0m");
-                    //         break;
-                    // }
-                    // discardTop.changeColor(color);
                 }
                 break;
-            } else if (playedCard == null) {
-                System.out.println("You don't have that card");
-            } else { // playedCard.canPlayCard(...) returned false
-                System.out.println("You can't play that card");
             }
 
             // if the user
@@ -182,7 +163,7 @@ public class Human extends Player {
      * {@inheritDoc}
      */
     @Override
-    boolean isHuman() {
+    public boolean isHuman() {
         return true;
     }
 
@@ -191,7 +172,7 @@ public class Human extends Player {
      * Closes the scanner when the game is over
      */
     @Override
-    void gameOverAction() {
+    public void gameOverAction() {
         kb.close();
     }
 
@@ -201,7 +182,7 @@ public class Human extends Player {
     @Override
     public String displayHand() {
         String output = "";
-        for (Card card : handCards) {
+        for (Card card : cardsInHand) {
             output += card;
             output += " ";
         }
