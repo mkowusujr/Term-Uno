@@ -9,7 +9,7 @@ public class Card {
     private boolean faceUp;
     
     /**
-     * Class constructor for creating an uno card
+     * Class Constructor for creating an uno card
      * 
      * @param color is the first letter of the card's color
      *      acceptable color values are 'r' for red,
@@ -116,7 +116,7 @@ public class Card {
             discardDeck.addToDiscardCard(this);
             return true;
         } else {
-            player.receiveHand(this);
+            player.addToHand(this);
             return false;
         }
     }
@@ -139,11 +139,11 @@ public class Card {
     }
 
     /**
-     * Converts the card values to a char string representing
+     * Converts the card values to a string representing
      * it's card type
      * @return A string representing the card's current face
      */
-    public String stringVal() {
+    public String displayCard() {
         if (isFaceUp() == true) {
             switch(value) {
                 case 10:
