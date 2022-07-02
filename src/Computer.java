@@ -17,7 +17,7 @@ public class Computer extends Player {
     }
 
     @Override
-    Card playCard(Deck playingDeck) {
+    Card playCard(PlayingDeck playingDeck) {
         Card lastPlayed = playingDeck.getTopOfDiscardDeck();
         // Pick a card
         ArrayList<Card> playable = new ArrayList<Card>();

@@ -3,12 +3,12 @@ import java.util.Scanner;
 import java.lang.Thread;
 
 public class Game {
-    private Deck gameDeck;
+    private PlayingDeck gameDeck;
     private Player[] players;
     private boolean clockwise;
 
     public Game(int numPlayers, int cardsAtStart) {
-        gameDeck = new Deck();
+        gameDeck = new PlayingDeck();
         ArrayList<Card> dealtCards;
 
         players = new Player[numPlayers + 1];

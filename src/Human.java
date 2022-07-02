@@ -67,7 +67,7 @@ public class Human extends Player {
      * @return The card the user chooses to play, null is the card doesn't
      *      exist in the user's hand
      */
-    private Card pickCard(Deck playingDeck, String move) {
+    private Card pickCard(PlayingDeck playingDeck, String move) {
         if (move.equals("draw")) {
             System.out.println("Drawing card from deck...");
             movingTime();
@@ -88,7 +88,7 @@ public class Human extends Player {
      * @param discardDeck The deck of cards being used to store the cards
      *      being discarded during the game
      */
-    private void changeSpecialCardColor(Deck discardDeck){
+    private void changeSpecialCardColor(PlayingDeck discardDeck){
         System.out.println("What color would you like change it too");
                     System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
                     String color = kb.nextLine();
@@ -126,7 +126,7 @@ public class Human extends Player {
      * prompt the user for what they want to do next.
      */
     @Override
-    Card playCard(Deck discardDeck) {
+    Card playCard(PlayingDeck discardDeck) {
         Card playedCard = null;
         String move = "";
         do {

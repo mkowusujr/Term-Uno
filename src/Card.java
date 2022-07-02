@@ -104,7 +104,7 @@ public class Card {
      * @return A boolean representing whether or not this card matches the
      *      card on top of the discard deck
      */
-    public boolean canPlayCard(Deck discardDeck, Player player) {
+    public boolean canPlayCard(PlayingDeck discardDeck, Player player) {
         if (this.equals(discardDeck.getTopOfDiscardDeck())) {
             String pType;
             if (player.isHuman()) {

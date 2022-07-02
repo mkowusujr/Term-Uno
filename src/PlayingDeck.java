@@ -1,10 +1,25 @@
 import java.util.*;
 
-public class Deck {
+/**
+ * The Class representing the full Deck of Uno cards
+ * 
+ * @author Mathew Owusu Jr
+ */
+public class PlayingDeck {
+    /**
+     * The deck cards are drew from
+     */
     ArrayList<Card> playingDeck;
+    /**
+     * The deck cards are discarded into
+     */
     ArrayList<Card> discardDeck;
+    /**
+     * The allowed colors a card can be in the deck
+     */
     private final char[] colors = { 'r', 'g', 'b', 'y' };
 
+    /** */
     private void unboxDeck() {
         playingDeck = new ArrayList<Card>();
         // Adding Zero Cards
@@ -27,7 +42,7 @@ public class Deck {
         }
     }
 
-    public Deck() {
+    public PlayingDeck() {
         unboxDeck();
         Collections.shuffle(playingDeck);
         discardDeck = new ArrayList<Card>();

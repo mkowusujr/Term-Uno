@@ -53,7 +53,7 @@ public abstract class Player {
      *      being discarded during the game
      * @return The card the Player is discarding from their hand
      */
-    abstract Card playCard(Deck discardDeck);
+    abstract Card playCard(PlayingDeck discardDeck);
 
     /**
      * How the Player Object will display their hand
