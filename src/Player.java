@@ -6,6 +6,9 @@ import java.util.ArrayList;
  * @author Mathew Owusu Jr
  */
 public abstract class Player {
+    /**
+     * The list of cards in a PLayer Object's hand
+     */
     protected ArrayList<Card> handCards;
 
     /**
