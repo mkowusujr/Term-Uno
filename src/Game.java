@@ -9,7 +9,7 @@ public class Game {
 
     public Game(int numPlayers, int cardsAtStart) {
         gameDeck = new Deck();
-        ArrayList<Card> deltCards;
+        ArrayList<Card> dealtCards;
 
         players = new Player[numPlayers + 1];
         players[0] = new Human();
@@ -17,8 +17,8 @@ public class Game {
             players[i] = new Computer();
         }
         for (Player player : players) {
-            deltCards = gameDeck.dealPlayingDeck(cardsAtStart);
-            player.receiveHand(deltCards);
+            dealtCards = gameDeck.dealPlayingDeck(cardsAtStart);
+            player.addToHand(dealtCards);
         }
         gameDeck.playDeck();
         clockwise = true;
@@ -82,7 +82,7 @@ public class Game {
             int topCardVal = cardPlayed.getValue();
             if (topCardVal > 9) { // Special card played
                 int nextPlayer;
-                ArrayList<Card> deltCards;
+                ArrayList<Card> dealtCards;
                 switch (topCardVal) {
                     case 10: // skip card
                         skip = true;
@@ -98,16 +98,16 @@ public class Game {
                         break;
                     case 12: // draw two card
                         nextPlayer = nextPlayer(startingPlayer);
-                        deltCards = gameDeck.dealPlayingDeck(2);
-                        players[nextPlayer].receiveHand(deltCards);
+                        dealtCards = gameDeck.dealPlayingDeck(2);
+                        players[nextPlayer].addToHand(dealtCards);
                         skip = true;
                         break;
                     case 13: // wild card, handled in elsewhere
                         break;
                     case 14: // draw 4 wild card
                         nextPlayer = nextPlayer(startingPlayer);
-                        deltCards = gameDeck.dealPlayingDeck(4);
-                        players[nextPlayer].receiveHand(deltCards);
+                        dealtCards = gameDeck.dealPlayingDeck(4);
+                        players[nextPlayer].addToHand(dealtCards);
                         skip = true;
                         break;
                 }
