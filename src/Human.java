@@ -147,13 +147,13 @@ public class Human extends Player {
                 if (discardDeck.getTopOfDeck().getValue() > 12) {
                     changeSpecialCardColor(discardDeck);
                 }
-                break;
+                break; // end loop and return playedCard now
             }
 
-            // if the user
+            // otherwise print a try again prompt
             if (!move.equals("draw"))
                 System.out.println("Play a different Card");
-            else
+            else // or return nothing which means the user had no playable cards
                 return null;
         } while (!move.equals("draw"));
         return playedCard;
