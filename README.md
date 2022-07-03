@@ -37,6 +37,8 @@ Here are some examples our how an uno card would be represented in game:
 The game represents face down cards as `u`, these are meant to simulate how the back of uno cards have say uno on the back
 
 
-#Installing and Running the Game
-Clone the reprository unto your device
-Good luck lol
+# Installing and Running the Game
+Clone the reprository and cd into it `gitclone https://github.com/mkowusujr/Term-Uno.git`
+
+Then run the following command to execute the project output and run the game, `java -cp output Game`.
+You must have java installed on your machince to when that command.
