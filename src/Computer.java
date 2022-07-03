@@ -66,6 +66,9 @@ public class Computer extends Player {
     /**
      * Picks the first card in the list of playable cards
      * 
+     * @param action A string containg the Computer Player's actions during it's turn
+     * @param playableCards The deck of cards being drawn from
+     * @param playingDeck The deck of cards being drawn from
      * @return The card chosen from the list of playable cards
      */
     private Card pickCard(String action, ArrayList<Card> playableCards, PlayingDeck playingDeck) {
