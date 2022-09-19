@@ -55,6 +55,7 @@ public class Game {
      * @param numOfCardsAtStart Number of cards each player starts with
      */
     private void dealPlayingDeckToPlayers(int numOfCardsAtStart) {
+        System.out.println("Dealing out playing deck...\n");
         ArrayList<Card> dealtCards;
         for (Player player : players) {
             dealtCards = playingDeck.dealPlayingDeck(numOfCardsAtStart);

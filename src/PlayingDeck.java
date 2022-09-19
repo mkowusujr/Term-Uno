@@ -21,8 +21,10 @@ public class PlayingDeck {
      * Creates and sets up the playing deck.
      */
     public PlayingDeck() {
+        System.out.println("Unboxing playing deck...");
         unboxDeck();
         Collections.shuffle(playingDeck);
+        System.out.println("Shuffling playing deck...");
     }
 
     /**
