@@ -33,11 +33,11 @@ public class Human extends Player {
     }
 
     /**
-     * Removes the card the user wants to discard from their 
+     * Removes the card the user wants to discard from their
      * 
      * @param card The card that the user plays to discard
      * @return The card being discard for the user's hand or null if the
-     *      user doesn't have the card or typed the card incorrectly
+     *         user doesn't have the card or typed the card incorrectly
      */
     private Card discardFromHand(String card) {
         Card played = null;
@@ -53,31 +53,66 @@ public class Human extends Player {
     }
 
     /**
+     * This fuction drawd from the playing deck.
+     * 
+     * @param playingDeck The playing deck for the game. The user can draw
+     *                    from it if they don't have a playable card
+     * @param move        The action the user wants to make. It can either be the
+     *                    the name of the card they want to play, for example "g7",
+     *                    or
+     *                    it can be the string "draw" if they don't have a playable
+     *                    card
+     * @return The name of the card drawn
+     */
+    private String drawFromPlayingDeck(PlayingDeck playingDeck, String move) {
+        System.out.println("Drawing card from deck...");
+        movingTime();
+        Card drawn = playingDeck.drawCard();
+        drawn.flipCard();
+        addToHand(drawn);
+        move = drawn.displayCard();
+        System.out.print("You drew a " + drawn + " card, ");
+        return move;
+    }
+
+    /**
+     * Prints a short tutorial to the terminal
+     */
+    private static void printHelpText() {
+        System.out.println("""
+                ---------------------------- Tutorial -----------------------------------
+                To play a card, type the card you would like to play.
+                For example, if you have the card 'b+2', when it is your turn to play, type 'b+2' to play the card.
+
+                If you do not have a playable card, type 'draw' to draw from the deck.
+
+                When it is your turn, type 'help' to see this tutorial text again.
+                -------------------------------------------------------------------------
+                """);
+    }
+
+    /**
      * The user picks the next card they want to play.
-     * If the user chooses to draw from the playing deck, this fuction 
-     * with draw from the playing deck and make the user attempt play 
-     * the card drawn. 
+     * If the user chooses to draw from the playing deck, this fuction
+     * draws from the playing deck and makes the user attempt play
+     * the card drawn.
      * If the User chooses to not draw, but rather play a card in their hand,
      * this function will fetch the card from their hand and discard it if it
      * exists
      * 
      * @param playingDeck The playing deck for the game. The user can draw
-     *      from it if they don't have a playable card
-     * @param move The action the user wants to make. It can either be the 
-     *      the name of the card they want to play, for example "g7", or
-     *      it can be the string "draw" if they don't have a playable card
+     *                    from it if they don't have a playable card
+     * @param move        The action the user wants to make. It can either be the
+     *                    the name of the card they want to play, for example "g7",
+     *                    or
+     *                    it can be the string "draw" if they don't have a playable
+     *                    card
      * @return The card the user chooses to play, null is the card doesn't
-     *      exist in the user's hand
+     *         exist in the user's hand
      */
     private Card pickCard(PlayingDeck playingDeck, String move) {
         if (move.equals("draw")) {
-            System.out.println("Drawing card from deck...");
-            movingTime();
-            Card drawn = playingDeck.drawCard();
-            drawn.flipCard();
-            addToHand(drawn);
-            move = drawn.displayCard();
-            System.out.print("You drew a " + drawn + " card, ");
+            move = drawFromPlayingDeck(playingDeck, move);
         }
 
         Card card = discardFromHand(move);
@@ -89,9 +124,9 @@ public class Human extends Player {
      * just played a Wild Card or a Plus Four Card
      * 
      * @param discardDeck The deck of cards being used to store the cards
-     *      being discarded during the game
+     *                    being discarded during the game
      */
-    private void changeSpecialCardColor(DiscardDeck discardDeck){
+    private void changeSpecialCardColor(DiscardDeck discardDeck) {
         System.out.println("What color would you like change it too");
         System.out.println("(r)ed, (b)lue, (g)reen, (y)ellow");
         String color = kb.nextLine();
@@ -114,18 +149,18 @@ public class Human extends Player {
         }
         lastPlayedCard.changeColor(color);
     }
-
+    
     /**
      * {@inheritDoc}.
      * Prompts the user for what move they want to make
      * If the choose to play a card from their hand, first
      * the function checks if they have the card the user wants to play,
      * then it checks if the card the user wants to play is a valid move.
-     * This function allows user multiple attempts to make a move if the 
+     * This function allows user multiple attempts to make a move if the
      * checks fail.
-     * This infinite loop ends once the user decided to draw from the playing deck 
+     * This infinite loop ends once the user decided to draw from the playing deck
      * instead. The loop also ends if the user makes a valid move.
-     * If the user plays a card that can change its color the function will 
+     * If the user plays a card that can change its color the function will
      * prompt the user for what they want to do next.
      */
     @Override
@@ -134,14 +169,19 @@ public class Human extends Player {
         String move = "";
         do {
             move = kb.nextLine();
+
+            if (move.equals("help")) {
+                printHelpText();
+                System.out.println("Make a move: ");
+                move = kb.nextLine();
+            }
+
             playedCard = this.pickCard(playingDeck, move);
             if (playedCard == null) {
                 System.out.println("You don't have that card");
-            } 
-            else if (!playedCard.canPlayCard(discardDeck, this)) {
+            } else if (!playedCard.canPlayCard(discardDeck, this)) {
                 System.out.println("You can't play that card");
-            }
-            else {
+            } else {
                 movingTime();
                 // If User plays a card that can change color
                 if (discardDeck.getTopOfDeck().getValue() > 12) {
