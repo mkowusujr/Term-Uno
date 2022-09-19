@@ -16,12 +16,13 @@ public class Game {
 
     /**
      * The Class Constructor.
-     * Sets up the Uno game. Creates a new playing deck. Creates the list of players.
+     * Sets up the Uno game. Creates a new playing deck. Creates the list of
+     * players.
      * The first player will always be a human, the rest will be computer players.
      * The amount of cards at the start of the game will be dealt outto all players.
      * Lastly a discard deck will be created
      * 
-     * @param numOfPlayers Number of players at the start of the game
+     * @param numOfPlayers      Number of players at the start of the game
      * @param numOfCardsAtStart Number of cards each player starts with
      */
     public Game(int numOfPlayers, int numOfCardsAtStart) {
@@ -33,7 +34,8 @@ public class Game {
     }
 
     /**
-     * Creates the players of the game. The first player is a human, the rest are Computer
+     * Creates the players of the game. The first player is a human, the rest are
+     * Computer
      * Players.
      * 
      * @param numOfPlayers Number of players at the start of the game
@@ -59,9 +61,10 @@ public class Game {
             player.addToHand(dealtCards);
         }
     }
-    
+
     /**
-     * Finds the next player in line to go using the last player's postion in the list,
+     * Finds the next player in line to go using the last player's postion in the
+     * list,
      * and whether or not the game is being played clockwise or counter clockwise
      * 
      * @param lastPosition The position of the last player that went
@@ -91,7 +94,7 @@ public class Game {
      * with the skip flag set to false to find out which player gets to go instead
      * 
      * @param lastPosition The position of the last player to go
-     * @param skip Whether or not the next player should be skipped
+     * @param skip         Whether or not the next player should be skipped
      * @return The positon of the next player to get a turn
      */
     private int whoGoesNext(int lastPosition, boolean skip) {
@@ -107,14 +110,15 @@ public class Game {
     /**
      * The message logged to the Terminal at the start of a round
      * 
-     * @param currentPlayerPosition The array index of the current Player in the list of
-     * Players
+     * @param currentPlayerPosition The array index of the current Player in the
+     *                              list of
+     *                              Players
      */
-    private void logStartOfRound(int currentPlayerPosition) {
+    private void logStartOfTurn(int currentPlayerPosition) {
         Player player = players[currentPlayerPosition];
 
         String playerString;
-        playerString = player.isHuman()? "Your" : "Player " + (currentPlayerPosition + 1) + "'s";
+        playerString = player.isHuman() ? "Your" : "Player " + (currentPlayerPosition + 1) + "'s";
         System.out.printf("It is %s Turn!\n", playerString);
         System.out.printf("%s Hand is: %s\n", playerString, player.displayHand());
 
@@ -131,10 +135,11 @@ public class Game {
     /**
      * Handles the last card played
      * 
-     * @param cardPlayed The last card played
-     * @param skip Whether or not the next player in line to play will get skipped
+     * @param cardPlayed            The last card played
+     * @param skip                  Whether or not the next player in line to play
+     *                              will get skipped
      * @param currentPlayerPosition The position of the player that played the card
-     *      on top.
+     *                              on top.
      * @return The boolean value of the skip flag
      */
     private boolean handlePlayedCard(Card cardPlayed, boolean skip, int currentPlayerPosition, Player player) {
@@ -144,7 +149,7 @@ public class Game {
         }
 
         switch (player.getHandCount()) {
-            case 1:  // if a player has one card, prints UNO! to terminal
+            case 1: // if a player has one card, prints UNO! to terminal
                 System.out.println("UNO!\n");
                 int nextPosition = whoGoesNext(currentPlayerPosition, skip);
                 playGame(nextPosition);
@@ -162,10 +167,12 @@ public class Game {
     /**
      * Handles the affects of specail cards
      * 
-     * @param topCardVal The card value of the card on the top of the discard eck
-     * @param skip Whether or not the next player in line to play will get skipped
+     * @param topCardVal            The card value of the card on the top of the
+     *                              discard eck
+     * @param skip                  Whether or not the next player in line to play
+     *                              will get skipped
      * @param currentPlayerPosition The position of the player that played the card
-     *      on top.
+     *                              on top.
      * @return the boolean value of the skip flag
      */
     private boolean handleSpecialCard(int topCardVal, boolean skip, int currentPlayerPosition) {
@@ -207,12 +214,13 @@ public class Game {
      * @param currentPlayerPosition
      * @param skip
      */
-    private void goToNextPlayer (int currentPlayerPosition, boolean skip) {
+    private void goToNextPlayer(int currentPlayerPosition, boolean skip) {
         int nextPosition = whoGoesNext(currentPlayerPosition, skip);
         System.out.println("\n");
         gameLag();
         playGame(nextPosition);
     }
+
     /**
      * Introduces lag to the game to make it easier to follow
      */
@@ -227,34 +235,65 @@ public class Game {
 
     /**
      * Runs the Uno game
-     * @param currentPlayerPosition The array index of the current Player in the list of
-     * Players
+     * 
+     * @param currentPlayerPosition The array index of the current Player in the
+     *                              list of
+     *                              Players
      */
     public void playGame(int currentPlayerPosition) {
         if (isGameOver == false) {
             boolean skip = false;
-      
-            logStartOfRound(currentPlayerPosition);
-            
+
+            logStartOfTurn(currentPlayerPosition);
+
             Player player = players[currentPlayerPosition];
-            Card cardPlayed = player.makeMove(playingDeck, discardDeck); 
-    
+            Card cardPlayed = player.makeMove(playingDeck, discardDeck);
+
             if (cardPlayed != null) {
                 skip = handlePlayedCard(cardPlayed, skip, currentPlayerPosition, player);
             }
-    
+
             goToNextPlayer(currentPlayerPosition, skip);
         }
     }
 
     /**
+     * Prints the welcome text to the screen
+     */
+    private static void printWelcomeText() {
+        System.out.println("""
+                 **********                                  **     **
+                /////**///                                  /**    /**
+                    /**      *****  ****** **********       /**    /** *******   ******
+                    /**     **///**//**//*//**//**//** *****/**    /**//**///** **////**
+                    /**    /******* /** /  /** /** /**///// /**    /** /**  /**/**   /**
+                    /**    /**////  /**    /** /** /**      /**    /** /**  /**/**   /**
+                    /**    //******/***    *** /** /**      //*******  ***  /**//******
+                    //      ////// ///    ///  //  //        ///////  ///   //  //////
+
+                Welcome to Term-Uno. Play vanilla uno from the comfort of your terminal!
+                -------------------------------------------------------------------------
+                """);
+    }
+
+    /**
+     * Prints a short tutorial to the terminal
+     */
+    private static void printHelpText() {
+        System.out.println("""
+                To play a card, type the card you would like to play.
+                For example, if you have the card 'b+2', when it is your turn to play, type 'b+2' to play the card.
+
+                If you do not have a playable card, type 'draw' to draw from the deck
+                -------------------------------------------------------------------------
+                """);
+    }
+
+    /**
      * Prompts the user for the settings they want to play the game with.
      * Then it sets up the game and runs it.
-     * 
-     * @param args Command Arguments
-     *  Will be used in feature version of project
      */
-    public static void main(String[] args) {
+    private static void runGame() {
         Scanner kb = new Scanner(System.in);
 
         System.out.print("How many computer opponents do you want to play (1-7): ");
@@ -262,10 +301,22 @@ public class Game {
 
         System.out.print("How cards do you want to start with: ");
         int numOfCards = kb.nextInt();
-        
+
         Game newGame = new Game(numOfPlayers, numOfCards);
         newGame.playGame(0);
         System.out.println("Game Over");
         kb.close();
+    }
+
+    /**
+     * Entry point for the game
+     * 
+     * @param args Command Arguments
+     *             Will be used in feature version of project
+     */
+    public static void main(String[] args) {
+        printWelcomeText();
+        printHelpText();
+        runGame();
     }
 }
