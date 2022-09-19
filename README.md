@@ -1,4 +1,4 @@
-# Text Base Uno
+# ![term-uno](/imgs/term-uno.png)
 This program is a recreation of vanilla uno using Java Object Orienented Programming.
 It is run through the terminal, and the user plays the game by intereacting with prompts from the terminal
 ![Demo](imgs/text-based-uno-demo.gif)
@@ -42,3 +42,6 @@ Clone the reprository and cd into it `gitclone https://github.com/mkowusujr/Term
 
 Then run the following command to execute the project output and run the game, `java -cp output Game`.
 You must have java installed on your machince to when that command.
+
+# Credit
+I got the font from [this site](https://fontmeme.com/uno-card-game-font/).
