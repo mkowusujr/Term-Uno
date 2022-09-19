@@ -35,7 +35,7 @@ public class Human extends Player {
     /**
      * Removes the card the user wants to discard from their
      * 
-     * @param card The card that the user plays to discard
+     * @param card The card that the user plays to discard deck
      * @return The card being discard for the user's hand or null if the
      *         user doesn't have the card or typed the card incorrectly
      */
@@ -118,14 +118,15 @@ public class Human extends Player {
             System.out.print("Make a move: ");
             move = kb.nextLine();
             pickCard(playingDeck, move);
-        }
-        else if (move.equals("draw")) {
+        } else if (move.equals("draw")) {
             move = drawFromPlayingDeck(playingDeck, move);
         }
 
         Card card = discardFromHand(move);
         return card;
     }
+
+    
 
     /**
      * Changes the color of the card last played. Used in cases where a user
@@ -181,7 +182,7 @@ public class Human extends Player {
             playedCard = this.pickCard(playingDeck, move);
             if (playedCard == null) {
                 System.out.println("You don't have that card");
-            } else if (!playedCard.canPlayCard(discardDeck, this)) {
+            } else if (!canPlayCard(discardDeck, playedCard)) {
                 System.out.println("You can't play that card");
             } else {
                 movingTime();

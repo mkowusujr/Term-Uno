@@ -120,7 +120,7 @@ public class Game {
         String playerString;
         playerString = player.isHuman() ? "Your" : "Player " + (currentPlayerPosition + 1) + "'s";
         System.out.printf("It is %s Turn!\n", playerString);
-        System.out.printf("The cards in %s Hand are: %s\n", playerString.toLowerCase(), player.displayHand());
+        System.out.printf("The cards in %s hand are: %s\n", playerString.toLowerCase(), player.displayHand());
 
         Card lastPlayedCard = discardDeck.getTopOfDeck();
         System.out.println("The top of the Discard Pile is a " + lastPlayedCard + " card");
@@ -128,7 +128,7 @@ public class Game {
         if (player.isHuman()) {
             System.out.print("Play a card: ");
         } else {
-            System.out.println("Play a card...");
+            System.out.println("Playing a card...");
         }
     }
 

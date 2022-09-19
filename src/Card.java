@@ -107,22 +107,22 @@ public class Card {
      * @return A boolean representing whether or not this card matches the
      *      card on top of the discard deck
      */
-    public boolean canPlayCard(DiscardDeck discardDeck, Player player) {
-        if (this.equals(discardDeck.getTopOfDeck())) {
-            String pType;
-            if (player.isHuman()) {
-                pType = "You played";
-            } else {
-                pType = "Played";
-            }
-            System.out.printf("%s a %s card\n", pType, this);
-            discardDeck.addToDeck(this);
-            return true;
-        } else {
-            player.addToHand(this);
-            return false;
-        }
-    }
+    // public boolean canPlayCard(DiscardDeck discardDeck, Player player) {
+    //     if (this.equals(discardDeck.getTopOfDeck())) {
+    //         String pType;
+    //         if (player.isHuman()) {
+    //             pType = "You played";
+    //         } else {
+    //             pType = "Played";
+    //         }
+    //         System.out.printf("%s a %s card\n", pType, this);
+    //         discardDeck.addToDeck(this);
+    //         return true;
+    //     } else {
+    //         player.addToHand(this);
+    //         return false;
+    //     }
+    // }
 
     /**
      * Checks if card has either the same color or card value 

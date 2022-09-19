@@ -149,7 +149,7 @@ public class Computer extends Player {
         discardFromHand(chosenCard);
 
         think();
-        if (chosenCard.canPlayCard(discardDeck, this)) {
+        if (canPlayCard(discardDeck, chosenCard)) {
             // cases where a color changing card is played
             if (discardDeck.getTopOfDeck().getValue() > 12) {
                 changeSpecialCardColor(discardDeck);

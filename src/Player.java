@@ -50,6 +50,32 @@ public abstract class Player {
     }
 
     /**
+     * Whether or not this card can be played on top of the discard deck
+     * 
+     * @param discardDeck The deck of cards being used to store the cards
+     *                    being discarded during the game
+     * @param card        The card that the user plays to discard
+     * @return A boolean representing whether or not this card matches the
+     *         card on top of the discard deck
+     */
+    public boolean canPlayCard(DiscardDeck discardDeck, Card card) {
+        if (card.equals(discardDeck.getTopOfDeck())) {
+            String pType;
+            if (isHuman()) {
+                pType = "You played";
+            } else {
+                pType = "Played";
+            }
+            System.out.printf("%s a %s card\n", pType, card);
+            discardDeck.addToDeck(card);
+            return true;
+        } else {
+            addToHand(card);
+            return false;
+        }
+    }
+
+    /**
      * How the Player Object will choose their next playing card
      * 
      * @param playingDeck The deck of cards being drawn from
