@@ -20,7 +20,7 @@ These special cards are the following
 * Reverse Card - changes the direction of the game
 * Draw Two Card - the next player draws two cards and loses a turn
 * Wild Card - changes the color of the card itself when played
-* Draw Four WIld Card - the next player draws four cards, loses a turn, and the user gets to change the color of this card
+* Draw Four Wild Card - the next player draws four cards, loses a turn, and the user gets to change the color of this card
 
 These are represented as:
 * `x` for skip cards
