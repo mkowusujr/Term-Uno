@@ -120,13 +120,13 @@ public class Game {
         String playerString;
         playerString = player.isHuman() ? "Your" : "Player " + (currentPlayerPosition + 1) + "'s";
         System.out.printf("It is %s Turn!\n", playerString);
-        System.out.printf("%s Hand is: %s\n", playerString, player.displayHand());
+        System.out.printf("The cards in %s Hand are: %s\n", playerString.toLowerCase(), player.displayHand());
 
         Card lastPlayedCard = discardDeck.getTopOfDeck();
         System.out.println("The top of the Discard Pile is a " + lastPlayedCard + " card");
 
         if (player.isHuman()) {
-            System.out.print("Play a card... ");
+            System.out.print("Play a card: ");
         } else {
             System.out.println("Play a card...");
         }
@@ -282,12 +282,13 @@ public class Game {
         System.out.println("""
                 ---------------------------- Tutorial -----------------------------------
                 To play a card, type the card you would like to play.
-                For example, if you have the card 'b+2', when it is your turn to play, type 'b+2' to play the card.
+                For example, if you have the card 'b+2', when it is your turn to play,
+                type 'b+2' to play the card.
 
                 If you do not have a playable card, type 'draw' to draw from the deck.
 
                 When it is your turn, type 'help' to see this tutorial text again. 
-                -------------------------------------------------------------------------
+                -------------------------- End of Tutorial ------------------------------
                 """);
     }
 
@@ -304,6 +305,7 @@ public class Game {
         System.out.print("How cards do you want to start with: ");
         int numOfCards = kb.nextInt();
 
+        System.out.println();
         Game newGame = new Game(numOfPlayers, numOfCards);
         newGame.playGame(0);
         System.out.println("Game Over");

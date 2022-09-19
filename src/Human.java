@@ -82,12 +82,13 @@ public class Human extends Player {
         System.out.println("""
                 ---------------------------- Tutorial -----------------------------------
                 To play a card, type the card you would like to play.
-                For example, if you have the card 'b+2', when it is your turn to play, type 'b+2' to play the card.
+                For example, if you have the card 'b+2', when it is your turn to play,
+                type 'b+2' to play the card.
 
                 If you do not have a playable card, type 'draw' to draw from the deck.
 
                 When it is your turn, type 'help' to see this tutorial text again.
-                -------------------------------------------------------------------------
+                -------------------------- End of Tutorial ------------------------------
                 """);
     }
 
@@ -111,7 +112,14 @@ public class Human extends Player {
      *         exist in the user's hand
      */
     private Card pickCard(PlayingDeck playingDeck, String move) {
-        if (move.equals("draw")) {
+        if (move.equals("help")) {
+            printHelpText();
+            System.out.println("The cards in your hand are: " + displayHand());
+            System.out.print("Make a move: ");
+            move = kb.nextLine();
+            pickCard(playingDeck, move);
+        }
+        else if (move.equals("draw")) {
             move = drawFromPlayingDeck(playingDeck, move);
         }
 
@@ -170,12 +178,6 @@ public class Human extends Player {
         do {
             move = kb.nextLine();
 
-            if (move.equals("help")) {
-                printHelpText();
-                System.out.println("Make a move: ");
-                move = kb.nextLine();
-            }
-
             playedCard = this.pickCard(playingDeck, move);
             if (playedCard == null) {
                 System.out.println("You don't have that card");
@@ -192,7 +194,7 @@ public class Human extends Player {
 
             // otherwise print a try again prompt
             if (!move.equals("draw"))
-                System.out.println("Play a different Card");
+                System.out.print("Play a different Card: ");
             else // or return nothing which means the user had no playable cards
                 return null;
         } while (!move.equals("draw"));
