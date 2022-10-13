@@ -38,11 +38,15 @@ The game represents face down cards as `u`, these are meant to simulate how the 
 
 
 # Installing and Running the Game
+Make sure you have java install, if you don't have java you can download it [here](https://dev.java/download/releases/). This project uses java 17. A java version of 13 or higher is needed so textblock string work properly.
+
+You will also need to have maven installed on your machine to run the exec command, if you don't have maven you can download it [here](https://maven.apache.org/download.cgi).
+
 Clone the reprository and cd into it `gitclone https://github.com/mkowusujr/Term-Uno.git`
 
-Then run the following command to execute the project output and run the game, `java -cp output Game`.
+Then run the following command to execute the project: `mvn exec:java`.
 You must have java installed on your machince to when that command.
 
-# Credit
+# Credits
 I got the font from [this site](https://fontmeme.com/uno-card-game-font/).
 I made the welcome ascii banner with [this site](https://onlineasciitools.com/convert-text-to-ascii-art).
