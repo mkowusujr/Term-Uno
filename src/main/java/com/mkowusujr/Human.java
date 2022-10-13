@@ -1,3 +1,4 @@
+package com.mkowusujr;
 import java.util.Scanner;
 import java.lang.Thread;
 
